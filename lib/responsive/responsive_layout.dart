@@ -1,10 +1,26 @@
 import 'package:flutter/cupertino.dart';
 
 class ResponsiveLayout extends StatelessWidget {
-  const ResponsiveLayout({super.key});
+  final Widget mobileScaffold;
+  final Widget tabletScaffold;
+  final Widget desktopScaffold;
+
+  ResponsiveLayout({
+    required this.mobileScaffold,
+    required this.tabletScaffold,
+    required this.desktopScaffold,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if(constraints.maxWidth < 500)
+          return mobileScaffold;
+        if(constraints.maxWidth < 1100)
+          return tabletScaffold;
+        return desktopScaffold;
+      },
+    );
   }
 }
