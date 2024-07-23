@@ -7,6 +7,7 @@ import 'package:flutter_web_responsive/responsive/tablet_scaffold.dart';
 void main() {
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -17,9 +18,8 @@ class MyApp extends StatelessWidget {
       home: ResponsiveLayout(
         mobileScaffold: const MobileScaffold(),
         tabletScaffold: const TabletScaffold(),
-        desktopScaffold: const DesktopScaffold(),
+        desktopScaffold: DesktopScaffold(),
       ),
     );
   }
 }
-
