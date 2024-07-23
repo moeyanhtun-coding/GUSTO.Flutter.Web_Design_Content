@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-var myDefaultBackground = const Color.fromARGB(255, 255, 255, 255);
+var myDefaultBackground = Color.fromARGB(255, 255, 255, 255);
 
 var myAppBar = AppBar(
   backgroundColor: Colors.grey[900],
