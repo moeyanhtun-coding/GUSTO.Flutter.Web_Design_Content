@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  buttons_flutter:
+    dependency: "direct main"
+    description:
+      name: buttons_flutter
+      sha256: "0a8446f30fc5210187e876b030feaa66465a0cfac17f27f6dad3c70c62853e79"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2+1"
   characters:
     dependency: transitive
     description:
@@ -62,6 +70,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_hooks:
+    dependency: transitive
+    description:
+      name: flutter_hooks
+      sha256: "6a126f703b89499818d73305e4ce1e3de33b4ae1c5512e3b8eab4b986f46774c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.6"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -147,6 +163,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
+  rate_in_stars:
+    dependency: "direct main"
+    description:
+      name: rate_in_stars
+      sha256: "1873da5b3b15b67de163ed4bc72d38725078111eb668c5399d7236946b277d9a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   sky_engine:
     dependency: transitive
     description: flutter
