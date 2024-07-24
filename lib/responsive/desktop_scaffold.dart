@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_web_responsive/constants.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rate_in_stars/rate_in_stars.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:latlong2/latlong.dart' as latLng;
+import 'package:flutter_map/flutter_map.dart' as flutterMap;
 
 class DesktopScaffold extends StatefulWidget {
   const DesktopScaffold({super.key});
@@ -16,6 +20,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
   bool isDetail = false;
   bool isOverview = false;
   bool isReview = false;
+  bool isShowMore = false;
 
   @override
   void initState() {
@@ -33,7 +38,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
           Expanded(
             child: _containerBox(),
           ),
-          _map(),
+          _map(context),
         ],
       ),
     );
@@ -68,7 +73,9 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                   _margin(0, 10),
                   _ratingAndReview(15),
                   _margin(0, 20),
-                  _contactAndShowMore()
+                  _contactAndShowMore(),
+                  _margin(0, 10),
+                  if (isShowMore) _cardRow(),
                 ],
               ),
             ],
@@ -290,43 +297,158 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
   }
 
   Widget _detail() {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white54,
+        borderRadius:
+            BorderRadius.circular(16.0), // Adjust the radius as needed
+      ),
       width: double.infinity,
-      height: MediaQuery.sizeOf(context).height * 0.1,
-      child: ListView(
-        children: [
-          const Text(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius sagittis dui et congue. Donec laoreet leo quis tortor pulvinar molestie. Pellentesque lobortis eros ut augue cursus mollis. Quisque odio est, cursus nec lobortis sed, pretium a massa. Maecenas placerat, urna et dignissim dapibus, felis ante scelerisque lorem, vestibulum vehicula dui ante a metus. In id augue ullamcorper turpis sodales accumsan sed in mauris. Nunc hendrerit, quam ultricies varius efficitur, quam enim mattis erat, scelerisque mollis risus ipsum vel risus. Vestibulum in neque blandit, consectetur felis ut, posuere felis.",
-            style: TextStyle(color: Colors.grey),
-          ),
-        ],
+      height: MediaQuery.sizeOf(context).height * 0.15,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(
+          children: const [
+            Text(
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius sagittis dui et congue. Donec laoreet leo quis tortor pulvinar molestie. Pellentesque lobortis eros ut augue cursus mollis. Quisque odio est, cursus nec lobortis sed, pretium a massa. Maecenas placerat, urna et dignissim dapibus, felis ante scelerisque lorem, vestibulum vehicula dui ante a metus. In id augue ullamcorper turpis sodales accumsan sed in mauris. Nunc hendrerit, quam ultricies varius efficitur, quam enim mattis erat, scelerisque mollis risus ipsum vel risus. Vestibulum in neque blandit, consectetur felis ut, posuere felis.",
+              style: TextStyle(color: Colors.grey),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _overView() {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white54,
+        borderRadius:
+            BorderRadius.circular(16.0), // Adjust the radius as needed
+      ),
       width: double.infinity,
-      height: MediaQuery.sizeOf(context).height * 0.1,
-      child: ListView(
-        children: [
-          const Text(
-            "Aenean eu magna id quam tincidunt lacinia eget ac diam. Donec luctus massa non tortor fermentum, id commodo tellus consectetur. Nunc rhoncus, nibh et viverra ullamcorper, metus nulla porta mi, rutrum ullamcorper nisi magna fringilla libero. Pellentesque ultricies, eros ut faucibus tempor, quam felis bibendum felis, et tempor nulla tortor sit amet est. Morbi in dictum purus, a viverra sem. Proin eget venenatis tortor. Morbi ut nibh nulla. Suspendisse rutrum ex semper semper condimentum. Pellentesque non ex at dui consequat viverra in at nisi. Fusce commodo porttitor nulla, a mattis mauris egestas non. In pharetra viverra dolor, eu lobortis eros tempor vel.",
-            style: TextStyle(color: Colors.grey),
-          ),
-        ],
+      height: MediaQuery.sizeOf(context).height * 0.15,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(
+          children: const [
+            Text(
+              "Aenean eu magna id quam tincidunt lacinia eget ac diam. Donec luctus massa non tortor fermentum, id commodo tellus consectetur. Nunc rhoncus, nibh et viverra ullamcorper, metus nulla porta mi, rutrum ullamcorper nisi magna fringilla libero. Pellentesque ultricies, eros ut faucibus tempor, quam felis bibendum felis, et tempor nulla tortor sit amet est. Morbi in dictum purus, a viverra sem. Proin eget venenatis tortor. Morbi ut nibh nulla. Suspendisse rutrum ex semper semper condimentum. Pellentesque non ex at dui consequat viverra in at nisi. Fusce commodo porttitor nulla, a mattis mauris egestas non. In pharetra viverra dolor, eu lobortis eros tempor vel.",
+              style: TextStyle(color: Colors.grey),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _review() {
+    final List<String> names = [
+      'Alex Johnson',
+      'Jamie Smith',
+      'Taylor Brown',
+      'Jordan Lee',
+      'Morgan Davis',
+      'Casey Wilson',
+      'Riley Martin',
+      'Quinn Anderson',
+      'Avery Clark',
+      'Parker Lewis',
+    ];
+    final List<String> comments = [
+      'Great job on this!',
+      'Very interesting article indeed.',
+      'I love this feature.',
+      'Fantastic work, well done.',
+      'Could be improved slightly.',
+      'More details would help.',
+      'Excellent, keep it up!',
+      'This needs some changes.',
+      'Nice work on this!',
+      'Well explained and clear.',
+    ];
+    final List<String> imageUrls = [
+      'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600',
+      'https://images.pexels.com/photos/428364/pexels-photo-428364.jpeg?auto=compress&cs=tinysrgb&w=600',
+      'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=600',
+      'https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=600',
+      'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=600',
+      'https://images.pexels.com/photos/1559486/pexels-photo-1559486.jpeg?auto=compress&cs=tinysrgb&w=600',
+      'https://images.pexels.com/photos/1080213/pexels-photo-1080213.jpeg?auto=compress&cs=tinysrgb&w=600',
+      'https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&w=600',
+      'https://images.pexels.com/photos/343717/pexels-photo-343717.jpeg?auto=compress&cs=tinysrgb&w=600',
+      'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=600',
+    ];
+
     return Container(
-      color: Colors.blueAccent,
+      padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 242, 250, 255),
+        borderRadius:
+            BorderRadius.circular(16.0), // Adjust the radius as needed
+      ),
       width: double.infinity,
       height: MediaQuery.sizeOf(context).height * 0.3,
-      child: ListView(
-        children: [],
+      child: ListView.builder(
+        itemCount: names.length,
+        itemBuilder: (context, index) {
+          return _comment(
+            comments[index],
+            imageUrls[index],
+            names[index],
+          );
+        },
       ),
+    );
+  }
+
+  Widget _comment(String comment, String image, String name) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 255, 255, 255),
+          borderRadius:
+              BorderRadius.circular(16.0), // Adjust the radius as needed
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                backgroundImage: NetworkImage(image),
+                radius: 20,
+              ),
+              _margin(10, 0),
+              _nameAndCmd(name, comment),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _nameAndCmd(String name, String cmd) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          name,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          cmd,
+          style: const TextStyle(
+            color: Colors.grey,
+            fontSize: 15,
+          ),
+        )
+      ],
     );
   }
 
@@ -365,21 +487,26 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
 
   Widget _showMore() {
     return TextButton(
-        onPressed: () {},
-        child: const Row(
-          children: [
-            Icon(
-              Icons.arrow_drop_down,
-              size: 30,
-              color: Colors.blueAccent,
-            ),
-            Text(
-              "Show More",
-              style: TextStyle(
-                  color: Colors.blueAccent, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ));
+      onPressed: () {
+        setState(() {
+          isShowMore = !isShowMore;
+        });
+      },
+      child: const Row(
+        children: [
+          Icon(
+            Icons.arrow_drop_down,
+            size: 30,
+            color: Colors.blueAccent,
+          ),
+          Text(
+            "Show More",
+            style: TextStyle(
+                color: Colors.blueAccent, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _contactButton() {
@@ -432,17 +559,168 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
     );
   }
 
-  Widget _map() {
-    return SizedBox(
-      width: MediaQuery.sizeOf(context).width * 0.3,
-      height: double.infinity,
+  Widget _map(context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        width: MediaQuery.sizeOf(context).width * 0.3,
+        height: double.infinity,
+        child: FlutterMap(
+          options: const MapOptions(
+              initialCenter:
+                  latLng.LatLng(16.81650498982013, 96.12937485793105),
+              initialZoom: 15),
+          children: [
+            openStreetMapMapTileLater,
+            const MarkerLayer(
+              markers: [
+                flutterMap.Marker(
+                  point: latLng.LatLng(16.81650498982013, 96.12937485793105),
+                  width: 60,
+                  height: 60,
+                  child: Icon(
+                    Icons.location_pin,
+                    size: 60,
+                    color: Colors.redAccent,
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
+
+  TileLayer get openStreetMapMapTileLater => TileLayer(
+        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+        userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+      );
 
   Widget _margin(double width, double height) {
     return SizedBox(
       width: width,
       height: height,
+    );
+  }
+
+  Widget _cardRow() {
+    return Row(
+      children: [
+        Expanded(
+          child: _propertyCard(context,
+              "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=600"),
+        ),
+        Expanded(
+          child: _propertyCard(context,
+              "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=600"),
+        ),
+        Expanded(
+          child: _propertyCard(context,
+              "https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=600"),
+        ),
+      ],
+    );
+  }
+
+  Widget _propertyCard(BuildContext context, String image) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Container(
+          width: double.infinity,
+          height: 320,
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      image,
+                      height: MediaQuery.sizeOf(context).height * 0.13,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                    top: 10,
+                    right: 10,
+                    child: Container(
+                      child: Text(
+                        "Stock",
+                        style: TextStyle(fontSize: 9),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      color: Colors.orange,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Text(
+                '\40000MMK /month',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Crown Apartment',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                '45/HanTharWaddy Road/ Kamayut, Yangon',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 80, 78, 78),
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.bed),
+                      SizedBox(width: 4),
+                      Text('2 Bed'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.bathtub),
+                      SizedBox(width: 4),
+                      Text('2 Bath'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.square_foot),
+                      SizedBox(width: 4),
+                      Text('4500 Sq'),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
