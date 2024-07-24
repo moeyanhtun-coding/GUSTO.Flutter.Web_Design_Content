@@ -7,6 +7,7 @@ import 'package:rate_in_stars/rate_in_stars.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 import 'package:flutter_map/flutter_map.dart' as flutterMap;
+import 'package:carousel_slider/carousel_slider.dart';
 
 class DesktopScaffold extends StatefulWidget {
   const DesktopScaffold({super.key});
@@ -16,11 +17,21 @@ class DesktopScaffold extends StatefulWidget {
 }
 
 class _DesktopScaffoldState extends State<DesktopScaffold> {
+  final List<String> imgList = [
+    "https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "https://images.pexels.com/photos/37347/office-sitting-room-executive-sitting.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "https://images.pexels.com/photos/2631746/pexels-photo-2631746.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  ];
+
+  int _currentPage = 0;
+
   double rating = 4.7;
   bool isDetail = false;
   bool isOverview = false;
   bool isReview = false;
   bool isShowMore = false;
+  bool isFavorite = false;
 
   @override
   void initState() {
@@ -59,12 +70,10 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                   _profileSection(),
                   _margin(0, 20),
                   _locationAndPrice(),
-                  Container(
-                    width: double.infinity,
-                    height: 500,
-                    color: Colors.blueAccent,
-                  ),
                   _margin(0, 10),
+                  _carouselImage(),
+                  _margin(0, 10),
+                  _underCarousel(),
                   _listDetail(),
                   _margin(0, 10),
                   if (isDetail) _detail(),
@@ -80,6 +89,172 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _carouselImage() {
+    return Column(
+      children: [
+        CarouselSlider(
+          items: imgList
+              .map(
+                (e) => Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      e,
+                      height: MediaQuery.sizeOf(context).height * 0.5,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+          options: CarouselOptions(
+              initialPage: 0,
+              autoPlay: true,
+              autoPlayInterval: const Duration(milliseconds: 2000),
+              enlargeCenterPage: true,
+              enlargeFactor: 0.33,
+              onPageChanged: (value, _) {
+                setState(() {
+                  _currentPage = value;
+                });
+              }),
+        ),
+        _buildCarouselIndicator()
+      ],
+    );
+  }
+
+  Widget _buildCarouselIndicator() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        for (int i = 0; i < imgList.length; i++)
+          Container(
+            height: i == _currentPage ? 10 : 5,
+            width: i == _currentPage ? 10 : 5,
+            margin: const EdgeInsets.all(7),
+            decoration: BoxDecoration(
+              color: i == _currentPage ? Colors.blueAccent : Colors.grey,
+              shape: BoxShape.circle,
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget _underCarousel() {
+    return Row(
+      children: [
+        Expanded(
+          child: _room(),
+        ),
+        Container(
+          width: MediaQuery.sizeOf(context).width * 0.08,
+          child: Center(
+            child: IconButton(
+              hoverColor: Colors.redAccent[50],
+              onPressed: () {
+                setState(() {
+                  isFavorite = !isFavorite;
+                });
+              },
+              icon: Icon(
+                Icons.favorite,
+                size: 35,
+                color: isFavorite ? Colors.redAccent : Colors.grey[300],
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: _roomFeature(),
+        ),
+      ],
+    );
+  }
+
+  Widget _roomFeature() {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+          border: Border.all(color: const Color.fromARGB(255, 204, 204, 204)),
+          borderRadius: BorderRadius.circular(20)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 30),
+        child: Center(
+          child: Row(
+            children: [
+              _roomDecoration(Icons.bathtub_sharp, "2 baths"),
+              Container(
+                width: 1,
+                height: 60,
+                color: Colors.grey,
+              ),
+              _roomDecoration(Icons.king_bed, "2 Beds"),
+              Container(
+                width: 1,
+                height: 60,
+                color: Colors.grey,
+              ),
+              _roomDecoration(Icons.square_foot_sharp, "1837 sqft"),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _roomDecoration(IconData icon, String name) {
+    return Expanded(
+      child: Column(
+        children: [
+          Icon(
+            icon,
+            color: Colors.grey[700],
+          ),
+          Text(name)
+        ],
+      ),
+    );
+  }
+
+  Widget _room() {
+    return Row(
+      children: [
+        Expanded(
+          child: _roomImage(
+            "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          ),
+        ),
+        Expanded(
+          child: _roomImage(
+            "https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          ),
+        ),
+        Expanded(
+          child: _roomImage(
+              "https://images.pexels.com/photos/2631746/pexels-photo-2631746.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"),
+        ),
+      ],
+    );
+  }
+
+  Widget _roomImage(String image) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Image.network(
+          image,
+          height: MediaQuery.sizeOf(context).height * 0.13,
+          width: double.infinity,
+          fit: BoxFit.cover,
         ),
       ),
     );
@@ -561,35 +736,35 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
 
   Widget _map(context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-        ),
         width: MediaQuery.sizeOf(context).width * 0.3,
         height: double.infinity,
-        child: FlutterMap(
-          options: const MapOptions(
-              initialCenter:
-                  latLng.LatLng(16.81650498982013, 96.12937485793105),
-              initialZoom: 15),
-          children: [
-            openStreetMapMapTileLater,
-            const MarkerLayer(
-              markers: [
-                flutterMap.Marker(
-                  point: latLng.LatLng(16.81650498982013, 96.12937485793105),
-                  width: 60,
-                  height: 60,
-                  child: Icon(
-                    Icons.location_pin,
-                    size: 60,
-                    color: Colors.redAccent,
-                  ),
-                )
-              ],
-            )
-          ],
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: FlutterMap(
+            options: const MapOptions(
+                initialCenter:
+                    latLng.LatLng(16.81650498982013, 96.12937485793105),
+                initialZoom: 15),
+            children: [
+              openStreetMapMapTileLater,
+              const MarkerLayer(
+                markers: [
+                  flutterMap.Marker(
+                    point: latLng.LatLng(16.81650498982013, 96.12937485793105),
+                    width: 60,
+                    height: 60,
+                    child: Icon(
+                      Icons.location_pin,
+                      size: 60,
+                      color: Colors.redAccent,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -637,7 +812,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
         child: Container(
           width: double.infinity,
           height: 320,
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -656,12 +831,13 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                     top: 10,
                     right: 10,
                     child: Container(
-                      child: Text(
-                        "Stock",
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
+                      color: Colors.orange,
+                      child: const Text(
+                        "Avaliable",
                         style: TextStyle(fontSize: 9),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      color: Colors.orange,
                     ),
                   ),
                 ],
