@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 var myDefaultBackground = Color.fromARGB(255, 255, 255, 255);
 
@@ -184,7 +185,9 @@ Widget _logoutd() {
       5,
       "L O G O U T",
       Icons.logout,
-      () {},
+      () {
+        Get.offAllNamed("/login");
+      },
     ),
   );
 }
