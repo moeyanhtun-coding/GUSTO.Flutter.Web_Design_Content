@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_responsive/responsive/desktop_scaffold.dart';
-import 'package:flutter_web_responsive/responsive/mobile_scaffold.dart';
-import 'package:flutter_web_responsive/responsive/responsive_layout.dart';
-import 'package:flutter_web_responsive/responsive/tablet_scaffold.dart';
+import 'package:flutter_web_responsive/view/detail_page.dart';
+import 'package:flutter_web_responsive/view/login_page.dart';
+import 'package:flutter_web_responsive/view/register_page.dart';
+import 'package:get/get.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final routes = [
+    GetPage(name: '/register', page: () => const RegisterPage()),
+    GetPage(name: '/login', page: () => const LoginPage()),
+    GetPage(name: '/detail', page: () => const DetailPage()),
+  ];
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      getPages: routes,
       debugShowCheckedModeBanner: false,
-      home: ResponsiveLayout(
-        mobileScaffold: const MobileScaffold(),
-        tabletScaffold: const TabletScaffold(),
-        desktopScaffold: DesktopScaffold(),
-      ),
+      home: const LoginPage(),
     );
   }
 }
