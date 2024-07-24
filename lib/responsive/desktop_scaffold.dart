@@ -46,7 +46,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
         width: double.infinity,
         height: double.infinity,
         child: ScrollConfiguration(
-          behavior: ScrollBehavior().copyWith(scrollbars: false),
+          behavior: const ScrollBehavior().copyWith(scrollbars: false),
           child: ListView(
             children: [
               Column(
@@ -293,9 +293,13 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
     return SizedBox(
       width: double.infinity,
       height: MediaQuery.sizeOf(context).height * 0.1,
-      child: const Text(
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius sagittis dui et congue. Donec laoreet leo quis tortor pulvinar molestie. Pellentesque lobortis eros ut augue cursus mollis. Quisque odio est, cursus nec lobortis sed, pretium a massa. Maecenas placerat, urna et dignissim dapibus, felis ante scelerisque lorem, vestibulum vehicula dui ante a metus. In id augue ullamcorper turpis sodales accumsan sed in mauris. Nunc hendrerit, quam ultricies varius efficitur, quam enim mattis erat, scelerisque mollis risus ipsum vel risus. Vestibulum in neque blandit, consectetur felis ut, posuere felis.",
-        style: TextStyle(color: Colors.grey),
+      child: ListView(
+        children: [
+          const Text(
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius sagittis dui et congue. Donec laoreet leo quis tortor pulvinar molestie. Pellentesque lobortis eros ut augue cursus mollis. Quisque odio est, cursus nec lobortis sed, pretium a massa. Maecenas placerat, urna et dignissim dapibus, felis ante scelerisque lorem, vestibulum vehicula dui ante a metus. In id augue ullamcorper turpis sodales accumsan sed in mauris. Nunc hendrerit, quam ultricies varius efficitur, quam enim mattis erat, scelerisque mollis risus ipsum vel risus. Vestibulum in neque blandit, consectetur felis ut, posuere felis.",
+            style: TextStyle(color: Colors.grey),
+          ),
+        ],
       ),
     );
   }
@@ -304,9 +308,13 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
     return SizedBox(
       width: double.infinity,
       height: MediaQuery.sizeOf(context).height * 0.1,
-      child: const Text(
-        "Aenean eu magna id quam tincidunt lacinia eget ac diam. Donec luctus massa non tortor fermentum, id commodo tellus consectetur. Nunc rhoncus, nibh et viverra ullamcorper, metus nulla porta mi, rutrum ullamcorper nisi magna fringilla libero. Pellentesque ultricies, eros ut faucibus tempor, quam felis bibendum felis, et tempor nulla tortor sit amet est. Morbi in dictum purus, a viverra sem. Proin eget venenatis tortor. Morbi ut nibh nulla. Suspendisse rutrum ex semper semper condimentum. Pellentesque non ex at dui consequat viverra in at nisi. Fusce commodo porttitor nulla, a mattis mauris egestas non. In pharetra viverra dolor, eu lobortis eros tempor vel.",
-        style: TextStyle(color: Colors.grey),
+      child: ListView(
+        children: [
+          const Text(
+            "Aenean eu magna id quam tincidunt lacinia eget ac diam. Donec luctus massa non tortor fermentum, id commodo tellus consectetur. Nunc rhoncus, nibh et viverra ullamcorper, metus nulla porta mi, rutrum ullamcorper nisi magna fringilla libero. Pellentesque ultricies, eros ut faucibus tempor, quam felis bibendum felis, et tempor nulla tortor sit amet est. Morbi in dictum purus, a viverra sem. Proin eget venenatis tortor. Morbi ut nibh nulla. Suspendisse rutrum ex semper semper condimentum. Pellentesque non ex at dui consequat viverra in at nisi. Fusce commodo porttitor nulla, a mattis mauris egestas non. In pharetra viverra dolor, eu lobortis eros tempor vel.",
+            style: TextStyle(color: Colors.grey),
+          ),
+        ],
       ),
     );
   }

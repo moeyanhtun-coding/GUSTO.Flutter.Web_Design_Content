@@ -80,10 +80,7 @@ class Profile extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        const CircleAvatar(
-          backgroundImage: AssetImage("assets/images/progile.png"),
-          radius: 25, // Set the radius for the size of the avatar
-        ),
+        const Image(image: AssetImage("assets/images/profile.jpg"))
       ],
     );
   }
