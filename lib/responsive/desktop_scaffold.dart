@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_web_responsive/constants.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rate_in_stars/rate_in_stars.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
+// ignore: library_prefixes
 import 'package:latlong2/latlong.dart' as latLng;
+// ignore: library_prefixes
 import 'package:flutter_map/flutter_map.dart' as flutterMap;
 import 'package:carousel_slider/carousel_slider.dart';
 
