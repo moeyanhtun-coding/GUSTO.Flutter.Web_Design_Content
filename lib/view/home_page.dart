@@ -83,9 +83,9 @@ class _HomePageState extends State<HomePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _homeText("Find The Home To", 80, FontWeight.bold),
-        _homeText("Your Perfect", 70, FontWeight.normal),
-        _homeText("Retreat", 70, FontWeight.normal)
+        _homeText("Find Real Estate", 80, FontWeight.bold),
+        _homeText("And Get Your", 80, FontWeight.bold),
+        _homeText("Dream Space", 80, FontWeight.bold)
       ],
     );
   }
@@ -132,24 +132,6 @@ class _HomePageState extends State<HomePage> {
                 });
               }),
         ),
-      ],
-    );
-  }
-
-  Widget _buildCarouselIndicator() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        for (int i = 0; i < imgList.length; i++)
-          Container(
-            height: i == _currentPage ? 10 : 5,
-            width: i == _currentPage ? 10 : 5,
-            margin: const EdgeInsets.all(7),
-            decoration: BoxDecoration(
-              color: i == _currentPage ? Colors.blueAccent : Colors.grey,
-              shape: BoxShape.circle,
-            ),
-          ),
       ],
     );
   }
