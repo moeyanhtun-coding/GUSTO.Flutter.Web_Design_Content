@@ -142,11 +142,11 @@ class _CategoryPageState extends State<CategoryPage> {
           myDrawer,
           Expanded(child: _itemGroup()),
           CommonMapWidget(
-              widthFactor: 0.3,
-              initialCenter:
-                  latLng.LatLng(21.58150733972306, 96.11868142430097),
-              initialZoom: 6,
-              markerPoints: locations),
+            widthFactor: 0.3,
+            initialCenter: latLng.LatLng(21.58150733972306, 96.11868142430097),
+            initialZoom: 6,
+            markerPoints: locations,
+          ),
         ],
       ),
     );
@@ -156,23 +156,77 @@ class _CategoryPageState extends State<CategoryPage> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      child: _grideViewItem(),
+      child: Column(
+        children: [
+          Margin(width: 0, height: 20),
+          _profileSection(),
+          Expanded(child: _grideViewItem()),
+        ],
+      ),
     );
   }
 
   Widget _grideViewItem() {
-    return GridView.builder(
-      itemCount: locationList.length,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-      itemBuilder: (context, index) {
-        return CardItem(
-          cardImage: imgList1[index],
-          itemPrice: priceList[index],
-          itemLocation: locationList[index],
-          itemType: typeList[index],
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+      child: GridView.builder(
+        itemCount: locationList.length,
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        itemBuilder: (context, index) {
+          return CardItem(
+            cardImage: imgList1[index],
+            itemPrice: priceList[index],
+            itemLocation: locationList[index],
+            itemType: typeList[index],
+          );
+        },
+      ),
     );
+  }
+
+  Widget _profileSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+              child: _inputField(
+                  context, "Search .. ", 0.008, Icons.search, false)),
+          Margin(width: 50, height: 0),
+          _profile("Moe yan"),
+        ],
+      ),
+    );
+  }
+
+  Widget _routeName(String firstName, String secondName) {
+    return RoutePath(
+      firstName: firstName,
+      secondName: secondName,
+    );
+  }
+
+  Widget _inputField(context, String formName, double borderRadius,
+      IconData icon, bool obscureText) {
+    return TextField(
+      decoration: InputDecoration(
+          hintText: formName,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(
+                  MediaQuery.sizeOf(context).width * borderRadius),
+              borderSide: BorderSide.none),
+          fillColor: const Color.fromARGB(255, 0, 140, 255).withOpacity(0.2),
+          filled: true,
+          prefixIcon: Icon(icon),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 0, vertical: 20)),
+      obscureText: obscureText,
+    );
+  }
+
+  Widget _profile(String name) {
+    return Profile(name: name);
   }
 }
