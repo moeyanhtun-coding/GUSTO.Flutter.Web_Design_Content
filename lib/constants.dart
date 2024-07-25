@@ -31,9 +31,14 @@ Widget _listGroup() {
           padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
           child: ListView(
             children: [
-              _listItem(0, "H O M E", Icons.home, () {}),
+              _listItem(0, "H O M E", Icons.home, () {
+                Get.toNamed("/home");
+              }),
               _margin(0, 0.005, context),
-              _listItem(1, "F A V O R I T E", Icons.favorite, () {}),
+              _listItem(1, "F A V O R I T E", Icons.favorite, () {
+                print("helllo");
+                Get.toNamed("/favorite");
+              }),
               _margin(0, 0.005, context),
               _listItem(2, "S E R V I C E S", Icons.person, () {}),
               _margin(0, 0.005, context),
@@ -41,7 +46,9 @@ Widget _listGroup() {
                 Get.toNamed("/category");
               }),
               _margin(0, 0.005, context),
-              _listItem(4, "C O N T A C T S", Icons.contact_mail, () {}),
+              _listItem(4, "C O N T A C T S  U S", Icons.contact_mail, () {
+                Get.toNamed("/contactUs");
+              }),
               _margin(0, 0.005, context),
               _listItem(6, "S E T T I N G", Icons.settings, () {}),
             ],
@@ -316,7 +323,12 @@ class _CardItemState extends State<CardItem> {
                       icon: Icon(
                         Icons.favorite,
                         size: 30,
-                        color: isFavorite ? Colors.redAccent : Colors.grey[300],
+                        color:
+                            ModalRoute.of(context)?.settings.name == '/favorite'
+                                ? Colors.red
+                                : (isFavorite
+                                    ? Colors.redAccent
+                                    : Colors.grey[300]),
                       ),
                     ),
                   ],
@@ -334,52 +346,101 @@ class CommonMapWidget extends StatelessWidget {
   final double widthFactor;
   final latLng.LatLng initialCenter;
   final double initialZoom;
-  final latLng.LatLng markerPoint;
+  final List<latLng.LatLng> markerPoints;
 
   const CommonMapWidget({
     Key? key,
     required this.widthFactor,
     required this.initialCenter,
     required this.initialZoom,
-    required this.markerPoint,
+    required this.markerPoints,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 20, 20, 20),
+      padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
       child: SizedBox(
         width: MediaQuery.sizeOf(context).width * widthFactor,
         height: double.infinity,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: FlutterMap(
-            options: MapOptions(
+          child: flutterMap.FlutterMap(
+            options: flutterMap.MapOptions(
               initialCenter: initialCenter,
               initialZoom: initialZoom,
             ),
             children: [
-              TileLayer(
+              flutterMap.TileLayer(
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 userAgentPackageName: 'dev.fleaflet.flutter_map.example',
               ),
-              MarkerLayer(
-                markers: [
-                  flutterMap.Marker(
-                    point: markerPoint,
+              flutterMap.MarkerLayer(
+                markers: markerPoints.map((point) {
+                  return flutterMap.Marker(
+                    point: point,
                     width: 60,
                     height: 60,
-                    child: Icon(
+                    child: const Icon(
                       Icons.location_pin,
                       size: 60,
                       color: Colors.redAccent,
                     ),
-                  ),
-                ],
+                  );
+                }).toList(),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class Margin extends StatelessWidget {
+  double width;
+  double height;
+
+  Margin({
+    required this.width,
+    required this.height,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width,
+      height: height,
+    );
+  }
+}
+
+class CustomInputField extends StatelessWidget {
+  final String formName;
+  final IconData icon;
+
+  const CustomInputField({
+    Key? key,
+    required this.formName,
+    required this.icon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      decoration: InputDecoration(
+        hintText: formName,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(
+            MediaQuery.of(context).size.width * 0.008,
+          ),
+          borderSide: BorderSide.none,
+        ),
+        fillColor: const Color.fromARGB(255, 0, 140, 255).withOpacity(0.2),
+        filled: true,
+        prefixIcon: Icon(icon),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
       ),
     );
   }
