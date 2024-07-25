@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-var myDefaultBackground = Color.fromARGB(255, 255, 255, 255);
+var myDefaultBackground = const Color.fromARGB(255, 255, 255, 255);
 
 var myAppBar = AppBar(
   backgroundColor: Colors.grey[900],
@@ -201,4 +201,124 @@ Widget _margin(
     width: MediaQuery.of(context).size.height * width,
     height: MediaQuery.of(context).size.height * height,
   );
+}
+
+class CardItem extends StatefulWidget {
+  String cardImage;
+  String itemPrice;
+  String itemType;
+  String itemLocation;
+
+  CardItem({
+    super.key,
+    required this.cardImage,
+    required this.itemPrice,
+    required this.itemLocation,
+    required this.itemType,
+  });
+
+  @override
+  State<CardItem> createState() => _CardItemState();
+}
+
+class _CardItemState extends State<CardItem> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Container(
+          width: double.infinity,
+          height: 350,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      widget.cardImage,
+                      height: MediaQuery.sizeOf(context).height * 0.13,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                    top: 10,
+                    right: 10,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
+                      color: Colors.orange,
+                      child: const Text(
+                        "Avaliable",
+                        style: TextStyle(fontSize: 9),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                widget.itemPrice,
+                style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                widget.itemType,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                widget.itemLocation,
+                style: const TextStyle(
+                  color: Color.fromARGB(255, 80, 78, 78),
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.bed),
+                      SizedBox(width: 4),
+                      Text('2 Bed'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.bathtub),
+                      SizedBox(width: 4),
+                      Text('2 Bath'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.square_foot),
+                      SizedBox(width: 4),
+                      Text('4500 Sq'),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
