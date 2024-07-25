@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_responsive/view/about_us.dart';
 import 'package:flutter_web_responsive/view/category_page.dart';
 import 'package:flutter_web_responsive/view/contact_us.dart';
 import 'package:flutter_web_responsive/view/detail_page.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
     GetPage(name: "/category", page: () => CategoryPage()),
     GetPage(name: "/contactUs", page: () => ContactUs()),
     GetPage(name: "/favorite", page: () => FavoritePage()),
-    GetPage(name: "/home", page: () => HomePage())
+    GetPage(name: "/home", page: () => HomePage()),
+    GetPage(name: "/aboutUs", page: () => AboutUs()),
   ];
   MyApp({super.key});
 
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       getPages: routes,
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: AboutUs(),
     );
   }
 }
