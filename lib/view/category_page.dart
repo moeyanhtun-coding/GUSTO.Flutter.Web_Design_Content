@@ -3,6 +3,29 @@ import 'package:flutter_web_responsive/constants.dart';
 import 'package:flutter_map/flutter_map.dart' as flutterMap;
 import 'package:latlong2/latlong.dart' as latLng;
 
+final List<latLng.LatLng> locations = [
+  latLng.LatLng(16.8248, 96.1302), // Yangon, Kamayut Township
+  latLng.LatLng(16.7983, 96.1546), // Yangon, Dagon Township
+  latLng.LatLng(16.8065, 96.1587), // Yangon, Bahan Township
+  latLng.LatLng(16.8331, 96.1276), // Yangon, Hlaing Township
+  latLng.LatLng(16.8587, 96.1241), // Yangon, Mayangone Township
+  latLng.LatLng(16.8153, 96.1698), // Yangon, Tamwe Township
+  latLng.LatLng(21.9787, 96.0836), // Mandalay, Chanayethazan Township
+  latLng.LatLng(21.9347, 96.0802), // Mandalay, Chanmyathazi Township
+  latLng.LatLng(21.9619, 96.0975), // Mandalay, Mahaaungmye Township
+  latLng.LatLng(21.9002, 96.1185), // Mandalay, Pyigyidagun Township
+  latLng.LatLng(19.7535, 96.1088), // Naypyidaw, Zabuthiri Township
+  latLng.LatLng(19.7672, 96.1201), // Naypyidaw, Ottarathiri Township
+  latLng.LatLng(19.7328, 96.1212), // Naypyidaw, Dekkhinathiri Township
+  latLng.LatLng(19.7163, 96.0945), // Naypyidaw, Pobbathiri Township
+  latLng.LatLng(17.3377, 96.4797), // Bago, Bago Township
+  latLng.LatLng(16.7798, 94.7384), // Pathein, Pathein Township
+  latLng.LatLng(20.7908, 97.0383), // Taunggyi, Taunggyi Township
+  latLng.LatLng(16.4917, 97.6281), // Mawlamyine, Mawlamyine Township
+  latLng.LatLng(20.1323, 92.8987), // Sittwe, Sittwe Township
+  latLng.LatLng(25.3864, 97.3958), // Myitkyina, Myitkyina Township
+];
+
 final List<String> imgList1 = [
   "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   "https://images.pexels.com/photos/10628388/pexels-photo-10628388.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -121,9 +144,9 @@ class _CategoryPageState extends State<CategoryPage> {
           CommonMapWidget(
               widthFactor: 0.3,
               initialCenter:
-                  latLng.LatLng(16.81650498982013, 96.12937485793105),
-              initialZoom: 15,
-              markerPoint: latLng.LatLng(16.81650498982013, 96.12937485793105)),
+                  latLng.LatLng(21.58150733972306, 96.11868142430097),
+              initialZoom: 6,
+              markerPoints: locations),
         ],
       ),
     );
