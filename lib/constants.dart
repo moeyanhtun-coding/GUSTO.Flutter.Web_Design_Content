@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map/flutter_map.dart' as flutterMap;
+import 'package:latlong2/latlong.dart' as latLng;
 
 var myDefaultBackground = const Color.fromARGB(255, 255, 255, 255);
 
@@ -33,7 +37,9 @@ Widget _listGroup() {
               _margin(0, 0.005, context),
               _listItem(2, "S E R V I C E S", Icons.person, () {}),
               _margin(0, 0.005, context),
-              _listItem(3, "R E N T", Icons.search, () {}),
+              _listItem(3, "R E N T", Icons.search, () {
+                Get.toNamed("/category");
+              }),
               _margin(0, 0.005, context),
               _listItem(4, "C O N T A C T S", Icons.contact_mail, () {}),
               _margin(0, 0.005, context),
@@ -222,96 +228,152 @@ class CardItem extends StatefulWidget {
 }
 
 class _CardItemState extends State<CardItem> {
+  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Container(
-          width: double.infinity,
-          height: 350,
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      widget.cardImage,
-                      height: MediaQuery.sizeOf(context).height * 0.13,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Positioned(
-                    top: 10,
-                    right: 10,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      color: Colors.orange,
-                      child: const Text(
-                        "Avaliable",
-                        style: TextStyle(fontSize: 9),
+      padding: const EdgeInsets.all(3.0),
+      child: InkWell(
+        onTap: () {
+          Get.toNamed("/detail");
+        },
+        child: Card(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Container(
+            width: double.infinity,
+            height: 360,
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        widget.cardImage,
+                        height: MediaQuery.sizeOf(context).height * 0.19,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Text(
-                widget.itemPrice,
-                style: const TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
+                    Positioned(
+                      top: 10,
+                      right: 10,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        color: Colors.orange,
+                        child: const Text(
+                          "Avaliable",
+                          style: TextStyle(
+                              fontSize: 9, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                widget.itemType,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                widget.itemLocation,
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 80, 78, 78),
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.bed),
-                      SizedBox(width: 4),
-                      Text('2 Bed'),
-                    ],
+                const SizedBox(height: 8),
+                Text(
+                  widget.itemPrice,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueAccent,
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.bathtub),
-                      SizedBox(width: 4),
-                      Text('2 Bath'),
-                    ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  widget.itemType,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.square_foot),
-                      SizedBox(width: 4),
-                      Text('4500 Sq'),
-                    ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.itemLocation,
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 80, 78, 78),
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      hoverColor: Colors.redAccent[50],
+                      onPressed: () {
+                        setState(() {
+                          isFavorite = !isFavorite;
+                        });
+                      },
+                      icon: Icon(
+                        Icons.favorite,
+                        size: 30,
+                        color: isFavorite ? Colors.redAccent : Colors.grey[300],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CommonMapWidget extends StatelessWidget {
+  final double widthFactor;
+  final latLng.LatLng initialCenter;
+  final double initialZoom;
+  final latLng.LatLng markerPoint;
+
+  const CommonMapWidget({
+    Key? key,
+    required this.widthFactor,
+    required this.initialCenter,
+    required this.initialZoom,
+    required this.markerPoint,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 20, 20, 20),
+      child: SizedBox(
+        width: MediaQuery.sizeOf(context).width * widthFactor,
+        height: double.infinity,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: FlutterMap(
+            options: MapOptions(
+              initialCenter: initialCenter,
+              initialZoom: initialZoom,
+            ),
+            children: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+              ),
+              MarkerLayer(
+                markers: [
+                  flutterMap.Marker(
+                    point: markerPoint,
+                    width: 60,
+                    height: 60,
+                    child: Icon(
+                      Icons.location_pin,
+                      size: 60,
+                      color: Colors.redAccent,
+                    ),
                   ),
                 ],
               ),
