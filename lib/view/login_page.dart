@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                               style: TextStyle(
                                 fontSize: 100,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: Color.fromRGBO(26, 83, 25, 1),
                               ),
                             ),
                             Text(
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                               style: TextStyle(
                                 fontSize: 80,
                                 fontWeight: FontWeight.normal,
-                                color: Colors.white,
+                                color: Color.fromRGBO(214, 239, 216, 1),
                               ),
                             )
                           ],
