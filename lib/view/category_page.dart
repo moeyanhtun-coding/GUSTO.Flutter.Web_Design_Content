@@ -1,7 +1,11 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_responsive/constants.dart';
 import 'package:flutter_map/flutter_map.dart' as flutterMap;
 import 'package:latlong2/latlong.dart' as latLng;
+
+String selectedPrice = '650,000 MMK/month';
+String selectedType = 'Penthouse';
 
 final List<latLng.LatLng> locations = [
   latLng.LatLng(16.8248, 96.1302), // Yangon, Kamayut Township
@@ -132,7 +136,9 @@ class _CategoryPageState extends State<CategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(214, 239, 216, 0.6), body: _buildUI());
+      backgroundColor: Color.fromRGBO(214, 239, 216, 0.6),
+      body: _buildUI(),
+    );
   }
 
   Widget _buildUI() {
@@ -160,11 +166,44 @@ class _CategoryPageState extends State<CategoryPage> {
       child: Column(
         children: [
           Margin(width: 0, height: 20),
+          _route(),
           _profileSection(),
+          _filter(),
           Expanded(child: _grideViewItem()),
         ],
       ),
     );
+  }
+
+  Widget _filter() {
+    return Container(
+      width: double.infinity,
+      height: 100,
+      child: Row(
+        children: [],
+      ),
+    );
+  }
+
+  Widget _route() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Margin(width: 20, height: 0),
+        _routeName("Home", "Category"),
+      ],
+    );
+  }
+
+  Widget _routeName(String firstName, String secondName) {
+    return RoutePath(
+      firstName: firstName,
+      secondName: secondName,
+    );
+  }
+
+  Widget _profile(String name) {
+    return Profile(name: name);
   }
 
   Widget _grideViewItem() {
@@ -205,13 +244,6 @@ class _CategoryPageState extends State<CategoryPage> {
     );
   }
 
-  Widget _routeName(String firstName, String secondName) {
-    return RoutePath(
-      firstName: firstName,
-      secondName: secondName,
-    );
-  }
-
   Widget _inputField(context, String formName, double borderRadius,
       IconData icon, bool obscureText) {
     return TextField(
@@ -228,9 +260,5 @@ class _CategoryPageState extends State<CategoryPage> {
               const EdgeInsets.symmetric(horizontal: 0, vertical: 20)),
       obscureText: obscureText,
     );
-  }
-
-  Widget _profile(String name) {
-    return Profile(name: name);
   }
 }
