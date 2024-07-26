@@ -36,7 +36,6 @@ Widget _listGroup() {
               }),
               _margin(0, 0.005, context),
               _listItem(1, "F A V O R I T E", Icons.favorite, () {
-                print("helllo");
                 Get.toNamed("/favorite");
               }),
               _margin(0, 0.005, context),
@@ -70,7 +69,7 @@ Widget _drawerHeader() {
         SizedBox(
           width: 20,
         ),
-        Text("Perfect House"),
+        Text("House Heaven"),
       ],
     ),
   );
@@ -169,13 +168,15 @@ class __ListItemState extends State<_ListItem> {
       child: ListTile(
         leading: Icon(
           widget.icon,
-          color: _hovering[widget.index] == true ? Colors.blue : Colors.black,
+          color: _hovering[widget.index] == true
+              ? Color.fromRGBO(26, 83, 25, 0.839)
+              : Colors.black,
           size: 20,
         ),
         title: Text(widget.title,
             style: TextStyle(
                 color: _hovering[widget.index] == true
-                    ? Colors.blue
+                    ? Color.fromRGBO(26, 83, 25, 0.839)
                     : Colors.black,
                 fontSize: 15)),
         onTap: widget.tap,
@@ -291,7 +292,7 @@ class _CardItemState extends State<CardItem> {
                   style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blueAccent,
+                    color: Color.fromRGBO(26, 83, 25, 1),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -439,7 +440,7 @@ class CustomInputField extends StatelessWidget {
           ),
           borderSide: BorderSide.none,
         ),
-        fillColor: const Color.fromARGB(255, 0, 140, 255).withOpacity(0.2),
+        fillColor: const Color(0x926AA96B),
         filled: true,
         prefixIcon: Icon(icon),
         contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
