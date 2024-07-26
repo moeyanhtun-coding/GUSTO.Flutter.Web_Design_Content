@@ -222,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         onPressed: () {
-          Get.offAllNamed('/favorite');
+          Get.offAllNamed('/home');
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
@@ -269,7 +269,7 @@ class _LoginPageState extends State<LoginPage> {
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         onPressed: () {
-          Get.offAllNamed('/detail');
+          Get.offAllNamed('/home');
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
@@ -307,7 +307,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginButton(context) {
     return ElevatedButton(
       onPressed: () {
-        Get.offAllNamed('/detail');
+        Get.offAllNamed('/home');
       },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
@@ -585,7 +585,7 @@ class _RegisterPageState extends State<RegisterPage> {
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         onPressed: () {
-          Get.offAllNamed('/detail');
+          Get.offAllNamed('/home');
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
@@ -632,7 +632,7 @@ class _RegisterPageState extends State<RegisterPage> {
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         onPressed: () {
-          Get.offAllNamed('/detail');
+          Get.offAllNamed('/home');
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
@@ -670,7 +670,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget _loginButton(context) {
     return ElevatedButton(
       onPressed: () {
-        Get.offAllNamed('/detail');
+        Get.offAllNamed('/home');
       },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
