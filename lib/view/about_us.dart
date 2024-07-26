@@ -26,7 +26,8 @@ class _AboutUsState extends State<AboutUs> {
   int _currentPage = 0;
   @override
   Widget build(BuildContext context) {
-    return _buildUI();
+    return Scaffold(
+        backgroundColor: Color.fromRGBO(214, 239, 216, 0.6), body: _buildUI());
   }
 
   Widget _buildUI() {
