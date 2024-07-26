@@ -130,11 +130,11 @@ class _ContactUsState extends State<ContactUs> {
             width: double.infinity,
             height: 250,
             child: CommonMapWidget(
-                widthFactor: 0.3,
-                initialCenter:
-                    latLng.LatLng(16.77679310121505, 96.228678157696),
-                initialZoom: 14,
-                markerPoints: locations),
+              widthFactor: 0.3,
+              initialCenter: latLng.LatLng(16.77679310121505, 96.228678157696),
+              initialZoom: 14,
+              markerPoints: locations,
+            ),
           ),
         ),
       ],
@@ -280,9 +280,7 @@ class _ContactUsState extends State<ContactUs> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
-        onPressed: () {
-          Get.offAllNamed('/detail');
-        },
+        onPressed: () {},
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
