@@ -472,3 +472,37 @@ class CustomInputField extends StatelessWidget {
     );
   }
 }
+
+class CustomDropdown extends StatelessWidget {
+  final String value;
+  final List<String> items;
+  final ValueChanged<String?> onChanged;
+
+  CustomDropdown({
+    required this.value,
+    required this.items,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: value,
+      icon: Icon(Icons.arrow_downward),
+      iconSize: 24,
+      elevation: 16,
+      style: TextStyle(color: Colors.deepPurple),
+      underline: Container(
+        height: 2,
+        color: Colors.deepPurpleAccent,
+      ),
+      onChanged: onChanged,
+      items: items.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+}
