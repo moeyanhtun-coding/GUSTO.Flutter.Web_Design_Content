@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
       style: TextStyle(
           fontSize: size,
           fontWeight: weight,
-          color: Colors.white,
+          color: Color.fromRGBO(214, 239, 216, 1),
           decoration: TextDecoration.none),
     );
   }
