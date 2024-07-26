@@ -90,7 +90,7 @@ class _ServicePageState extends State<ServicePage> {
           children: [
             _homeText("Modern", 70, FontWeight.w900, Colors.grey.shade900),
             Margin(width: 15, height: 0),
-            _homeText("Modern", 70, FontWeight.w900, Colors.green)
+            _homeText("House", 70, FontWeight.w900, Colors.green)
           ],
         ),
         _homeText(
@@ -239,9 +239,12 @@ class _ServicePageState extends State<ServicePage> {
             ),
           ),
           backgroundColor: WidgetStateProperty.all(Colors.green),
-          shadowColor: const WidgetStatePropertyAll(Color(0x00000000)),
+          shadowColor: WidgetStateProperty.all<Color>(
+              Colors.grey.withOpacity(0.5)), // Shadow color
+          elevation: WidgetStateProperty.all<double>(
+              10), // Elevation to create the shadow effect
           overlayColor: const WidgetStatePropertyAll(
-            Color.fromRGBO(106, 169, 107, 0.573),
+            Color.fromRGBO(70, 108, 70, 0.573),
           ),
         ),
         onPressed: () {
