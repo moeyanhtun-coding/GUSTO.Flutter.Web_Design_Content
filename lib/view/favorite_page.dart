@@ -113,11 +113,11 @@ class _FavoritePageState extends State<FavoritePage> {
           myDrawer,
           Expanded(child: _itemGroup()),
           CommonMapWidget(
-              widthFactor: 0.3,
-              initialCenter:
-                  latLng.LatLng(16.84597948042343, 96.16165741985243),
-              initialZoom: 13,
-              markerPoints: locations),
+            widthFactor: 0.3,
+            initialCenter: latLng.LatLng(16.84597948042343, 96.16165741985243),
+            initialZoom: 13,
+            markerPoints: locations,
+          ),
         ],
       ),
     );
@@ -127,8 +127,40 @@ class _FavoritePageState extends State<FavoritePage> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      child: _grideViewItem(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Margin(width: 0, height: 20),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: _profileSection(),
+          ),
+          Expanded(child: _grideViewItem()),
+        ],
+      ),
     );
+  }
+
+  Widget _profileSection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _routeName("Home", "Favorite"),
+        _profile("Moe Yan Htun"),
+      ],
+    );
+  }
+
+  Widget _routeName(String firstName, String secondName) {
+    return RoutePath(
+      firstName: firstName,
+      secondName: secondName,
+    );
+  }
+
+  Widget _profile(String name) {
+    return Profile(name: name);
   }
 
   Widget _grideViewItem() {
