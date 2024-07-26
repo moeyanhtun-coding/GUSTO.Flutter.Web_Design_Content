@@ -39,24 +39,26 @@ class _AboutUsState extends State<AboutUs> {
   }
 
   Widget _container() {
-    return Stack(
-      children: <Widget>[
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Margin(width: 0, height: 70),
-            Row(
-              children: [
-                Margin(width: 30, height: 0),
-                Expanded(child: _textRow2()),
-                Expanded(child: _carouselImage()),
-              ],
-            ),
-            Margin(width: 0, height: 30),
-            _textRow()
-          ],
-        ),
-      ],
+    return Container(
+      child: Stack(
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Margin(width: 0, height: 70),
+              Row(
+                children: [
+                  Margin(width: 30, height: 0),
+                  Expanded(child: _textRow2()),
+                  Expanded(child: _carouselImage()),
+                ],
+              ),
+              Margin(width: 0, height: 30),
+              _textRow()
+            ],
+          ),
+        ],
+      ),
     );
   }
 
