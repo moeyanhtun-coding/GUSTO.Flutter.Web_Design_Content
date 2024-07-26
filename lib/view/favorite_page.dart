@@ -107,7 +107,7 @@ class _FavoritePageState extends State<FavoritePage> {
 
   Widget _buildUI() {
     return Scaffold(
-      backgroundColor: myDefaultBackground,
+      backgroundColor: Color.fromRGBO(214, 239, 216, 1),
       body: Row(
         children: [
           myDrawer,
