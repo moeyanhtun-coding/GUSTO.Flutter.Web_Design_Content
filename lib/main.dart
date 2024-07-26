@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       getPages: routes,
       debugShowCheckedModeBanner: false,
-      home: AboutUs(),
+      home: LoginPage(),
     );
   }
 }
