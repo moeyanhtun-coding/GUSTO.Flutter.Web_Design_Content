@@ -42,7 +42,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: myDefaultBackground,
+      backgroundColor: Color.fromRGBO(214, 239, 216, 0.6),
       body: Row(
         children: [
           myDrawer,
@@ -352,7 +352,7 @@ class _DetailPageState extends State<DetailPage> {
                 (Set<WidgetState> states) {
                   // Conditional background color based on state
                   if (isDetail) {
-                    return const Color.fromARGB(255, 0, 140, 255)
+                    return const Color.fromARGB(128, 179, 25, 255)
                         .withOpacity(0.2); // Color when overview is true
                   } else {
                     return Colors.transparent; // Default color
@@ -366,7 +366,7 @@ class _DetailPageState extends State<DetailPage> {
             child: const Text(
               "Detail",
               style: TextStyle(
-                color: Colors.blueAccent,
+                color: Color.fromRGBO(26, 83, 25, 1),
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
               ),
@@ -401,7 +401,7 @@ class _DetailPageState extends State<DetailPage> {
             child: const Text(
               "Overview",
               style: TextStyle(
-                color: Colors.blueAccent,
+                color: Color.fromRGBO(26, 83, 25, 1),
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
               ),
@@ -437,7 +437,7 @@ class _DetailPageState extends State<DetailPage> {
             child: const Text(
               "Review",
               style: TextStyle(
-                color: Colors.blueAccent,
+                color: Color.fromRGBO(26, 83, 25, 1),
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
               ),
