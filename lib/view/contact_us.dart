@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_web_responsive/constants.dart';
 import 'package:flutter_map/flutter_map.dart' as flutterMap;
 import 'package:get/get.dart';
@@ -36,7 +37,7 @@ class _ContactUsState extends State<ContactUs> {
 
   Widget _container() {
     return Container(
-      color: Colors.black,
+      color: const Color.fromARGB(255, 46, 46, 46),
       child: Stack(
         children: <Widget>[
           // Background image with opacity
@@ -234,8 +235,8 @@ class _ContactUsState extends State<ContactUs> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
-        onPressed: () {
-          Get.offAllNamed('/detail');
+        onPressed: () async {
+          // FlutterPhoneDirectCaller.callNumber("+959890630456");
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
