@@ -140,7 +140,7 @@ class _DetailPageState extends State<DetailPage> {
             width: i == _currentPage ? 10 : 5,
             margin: const EdgeInsets.all(7),
             decoration: BoxDecoration(
-              color: i == _currentPage ? Colors.blueAccent : Colors.grey,
+              color: i == _currentPage ? Colors.green : Colors.grey,
               shape: BoxShape.circle,
             ),
           ),
@@ -203,6 +203,12 @@ class _DetailPageState extends State<DetailPage> {
                 color: Colors.grey,
               ),
               _roomDecoration(Icons.square_foot_sharp, "1837 sqft"),
+              Container(
+                width: 1,
+                height: 60,
+                color: Colors.grey,
+              ),
+              _roomDecoration(Icons.directions, "South East"),
             ],
           ),
         ),
@@ -266,7 +272,7 @@ class _DetailPageState extends State<DetailPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _routeName("Home", "Detail"),
-        _profile("Moe yan"),
+        _profile("Moe Yan Htun"),
       ],
     );
   }
@@ -299,7 +305,7 @@ class _DetailPageState extends State<DetailPage> {
         Text(
           '\$ 10,500',
           style: TextStyle(
-            color: Colors.blueAccent,
+            color: Colors.green,
             fontWeight: FontWeight.bold,
             fontSize: 30,
           ),
@@ -307,7 +313,7 @@ class _DetailPageState extends State<DetailPage> {
         Text(
           'Per Month',
           style: TextStyle(
-            color: Colors.blueAccent,
+            color: Colors.green,
             fontSize: 13,
             fontWeight: FontWeight.bold,
           ),
@@ -352,7 +358,7 @@ class _DetailPageState extends State<DetailPage> {
                 (Set<WidgetState> states) {
                   // Conditional background color based on state
                   if (isDetail) {
-                    return const Color.fromARGB(128, 179, 25, 255)
+                    return const Color.fromRGBO(106, 169, 107, 0.873)
                         .withOpacity(0.2); // Color when overview is true
                   } else {
                     return Colors.transparent; // Default color
@@ -360,7 +366,7 @@ class _DetailPageState extends State<DetailPage> {
                 },
               ),
               overlayColor: WidgetStateProperty.all(
-                const Color.fromARGB(255, 0, 140, 255).withOpacity(0.2),
+                const Color.fromRGBO(106, 169, 107, 0.573).withOpacity(0.2),
               ), // Change this color as needed
             ),
             child: const Text(
@@ -387,7 +393,7 @@ class _DetailPageState extends State<DetailPage> {
               backgroundColor: WidgetStateProperty.resolveWith<Color>(
                 (Set<WidgetState> states) {
                   if (isOverview) {
-                    return const Color.fromARGB(255, 0, 140, 255)
+                    return const Color.fromRGBO(106, 169, 107, 0.573)
                         .withOpacity(0.2);
                   } else {
                     return Colors.transparent;
@@ -395,7 +401,7 @@ class _DetailPageState extends State<DetailPage> {
                 },
               ),
               overlayColor: WidgetStateProperty.all(
-                const Color.fromARGB(255, 0, 140, 255).withOpacity(0.2),
+                const Color.fromRGBO(106, 169, 107, 0.573).withOpacity(0.2),
               ), // Change this color as needed
             ),
             child: const Text(
@@ -423,7 +429,7 @@ class _DetailPageState extends State<DetailPage> {
                 (Set<WidgetState> states) {
                   // Conditional background color based on state
                   if (isReview) {
-                    return const Color.fromARGB(255, 0, 140, 255)
+                    return const Color.fromRGBO(106, 169, 107, 0.573)
                         .withOpacity(0.2); // Color when overview is true
                   } else {
                     return Colors.transparent; // Default color
@@ -431,7 +437,7 @@ class _DetailPageState extends State<DetailPage> {
                 },
               ),
               overlayColor: WidgetStateProperty.all(
-                const Color.fromARGB(255, 0, 140, 255).withOpacity(0.2),
+                const Color.fromRGBO(106, 169, 107, 0.573).withOpacity(0.2),
               ), // Change this color as needed
             ),
             child: const Text(
@@ -557,7 +563,7 @@ class _DetailPageState extends State<DetailPage> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 242, 250, 255),
+        color: const Color.fromRGBO(106, 169, 107, 0.2),
         borderRadius:
             BorderRadius.circular(16.0), // Adjust the radius as needed
       ),
@@ -674,12 +680,12 @@ class _DetailPageState extends State<DetailPage> {
           Icon(
             Icons.arrow_drop_down,
             size: 30,
-            color: Colors.blueAccent,
+            color: Colors.green,
           ),
           Text(
             "Show More",
             style: TextStyle(
-              color: Colors.blueAccent,
+              color: Colors.green,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -698,10 +704,10 @@ class _DetailPageState extends State<DetailPage> {
                 BorderRadius.circular(20), // Adjust the radius as needed
           ),
         ),
-        backgroundColor: WidgetStateProperty.all(Colors.blueAccent),
+        backgroundColor: WidgetStateProperty.all(Colors.green),
         shadowColor: const WidgetStatePropertyAll(Color(0x00000000)),
         overlayColor: const WidgetStatePropertyAll(
-          Color.fromARGB(58, 0, 140, 255),
+          Color.fromRGBO(106, 169, 107, 0.573),
         ),
       ),
       onPressed: () {
@@ -852,7 +858,7 @@ class _DetailPageState extends State<DetailPage> {
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
+                  color: Colors.green,
                 ),
               ),
               const SizedBox(height: 8),
