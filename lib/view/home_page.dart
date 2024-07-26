@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   int _currentPage = 0;
   @override
   Widget build(BuildContext context) {
-    return _buildUI();
+    return Scaffold(body: _buildUI());
   }
 
   Widget _buildUI() {
