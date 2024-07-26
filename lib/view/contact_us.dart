@@ -20,7 +20,7 @@ class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: myDefaultBackground,
+      backgroundColor: Color.fromRGBO(214, 239, 216, 1),
       body: _buildUI(),
     );
   }
@@ -90,13 +90,13 @@ class _ContactUsState extends State<ContactUs> {
             Icon(
               icon,
               size: 26,
-              color: Colors.white,
+              color: Color.fromRGBO(214, 239, 216, 1),
             ),
             Margin(width: 10, height: 0),
             Text(
               name,
               style: TextStyle(
-                color: Colors.white,
+                color: Color.fromRGBO(214, 239, 216, 1),
                 fontSize: 20,
               ),
             )
@@ -105,7 +105,7 @@ class _ContactUsState extends State<ContactUs> {
         Text(
           info,
           style: TextStyle(
-            color: Colors.white,
+            color: Color.fromRGBO(214, 239, 216, 1),
             fontSize: 15,
           ),
         )
@@ -205,7 +205,7 @@ class _ContactUsState extends State<ContactUs> {
               ),
               borderSide: BorderSide.none,
             ),
-            fillColor: const Color.fromARGB(255, 0, 140, 255).withOpacity(0.2),
+            fillColor: Color.fromRGBO(106, 169, 107, 0.573),
             filled: true,
             contentPadding: const EdgeInsets.fromLTRB(40, 20, 20, 20),
           ),
@@ -259,7 +259,7 @@ class _ContactUsState extends State<ContactUs> {
             Icon(
               icon,
               size: 30,
-              color: Colors.blue,
+              color: Color.fromRGBO(26, 83, 25, 1),
             ),
             const SizedBox(
               width: 10,
@@ -268,7 +268,7 @@ class _ContactUsState extends State<ContactUs> {
               "Contact Now",
               style: const TextStyle(
                 fontSize: 15,
-                color: Colors.black,
+                color: Color.fromRGBO(26, 83, 25, 1),
                 fontWeight: FontWeight.w900,
               ),
             ),
@@ -305,7 +305,7 @@ class _ContactUsState extends State<ContactUs> {
             Icon(
               Icons.message,
               size: 30,
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: const Color.fromRGBO(26, 83, 25, 1),
             ),
             const SizedBox(
               width: 10,
