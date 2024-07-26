@@ -132,18 +132,21 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 
   Widget _grideViewItem() {
-    return GridView.builder(
-      itemCount: locations.length,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-      itemBuilder: (context, index) {
-        return CardItem(
-          cardImage: imgList1[index],
-          itemPrice: priceList[index],
-          itemLocation: locationList[index],
-          itemType: typeList[index],
-        );
-      },
+    return ScrollConfiguration(
+      behavior: const ScrollBehavior().copyWith(scrollbars: false),
+      child: GridView.builder(
+        itemCount: locations.length,
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        itemBuilder: (context, index) {
+          return CardItem(
+            cardImage: imgList1[index],
+            itemPrice: priceList[index],
+            itemLocation: locationList[index],
+            itemType: typeList[index],
+          );
+        },
+      ),
     );
   }
 }
