@@ -46,6 +46,7 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter_any_logo: ^1.1.1
   google_fonts: ^6.2.1
+  flutter_phone_direct_caller: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -65,7 +66,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/
+    - assets/images/mission.png
+    - assets/images/vision.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
