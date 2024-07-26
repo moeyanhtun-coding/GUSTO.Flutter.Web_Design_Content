@@ -131,7 +131,8 @@ class CategoryPage extends StatefulWidget {
 class _CategoryPageState extends State<CategoryPage> {
   @override
   Widget build(BuildContext context) {
-    return _buildUI();
+    return Scaffold(
+        backgroundColor: Color.fromRGBO(214, 239, 216, 0.6), body: _buildUI());
   }
 
   Widget _buildUI() {
@@ -169,18 +170,21 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget _grideViewItem() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-      child: GridView.builder(
-        itemCount: locationList.length,
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-        itemBuilder: (context, index) {
-          return CardItem(
-            cardImage: imgList1[index],
-            itemPrice: priceList[index],
-            itemLocation: locationList[index],
-            itemType: typeList[index],
-          );
-        },
+      child: ScrollConfiguration(
+        behavior: const ScrollBehavior().copyWith(scrollbars: false),
+        child: GridView.builder(
+          itemCount: locationList.length,
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          itemBuilder: (context, index) {
+            return CardItem(
+              cardImage: imgList1[index],
+              itemPrice: priceList[index],
+              itemLocation: locationList[index],
+              itemType: typeList[index],
+            );
+          },
+        ),
       ),
     );
   }
@@ -195,7 +199,7 @@ class _CategoryPageState extends State<CategoryPage> {
               child: _inputField(
                   context, "Search .. ", 0.008, Icons.search, false)),
           Margin(width: 50, height: 0),
-          _profile("Moe yan"),
+          _profile("Moe Yan Htun"),
         ],
       ),
     );
