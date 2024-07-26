@@ -39,9 +39,11 @@ Widget _listGroup() {
                 Get.toNamed("/favorite");
               }),
               _margin(0, 0.005, context),
-              _listItem(2, "S E R V I C E S", Icons.person, () {}),
+              _listItem(2, "S E R V I C E S", Icons.person, () {
+                Get.toNamed("/service");
+              }),
               _margin(0, 0.005, context),
-              _listItem(3, "R E N T", Icons.search, () {
+              _listItem(3, "S E A R C H", Icons.search, () {
                 Get.toNamed("/category");
               }),
               _margin(0, 0.005, context),
@@ -49,8 +51,17 @@ Widget _listGroup() {
                 Get.toNamed("/contactUs");
               }),
               _margin(0, 0.005, context),
-              _listItem(6, "A B O U T  U S", Icons.settings, () {
+              _listItem(6, "A B O U T   U S", Icons.announcement_rounded, () {
                 Get.toNamed("/aboutUs");
+              }),
+              _margin(0, 0.005, context),
+              _listItem(7, "B U Y", Icons.production_quantity_limits_rounded,
+                  () {
+                Get.toNamed("/category");
+              }),
+              _margin(0, 0.005, context),
+              _listItem(8, "R E N T", Icons.house, () {
+                Get.toNamed("/category");
               }),
             ],
           ),
@@ -296,12 +307,25 @@ class _CardItemState extends State<CardItem> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  widget.itemType,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.itemType,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      "Buy / Rent",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(26, 83, 25, 1),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 8),
                 Row(
