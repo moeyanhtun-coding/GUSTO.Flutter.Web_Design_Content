@@ -208,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(
                   MediaQuery.sizeOf(context).width * borderRadius),
               borderSide: BorderSide.none),
-          fillColor: const Color.fromARGB(255, 0, 140, 255).withOpacity(0.2),
+          fillColor: Color.fromRGBO(106, 169, 107, 0.573),
           filled: true,
           prefixIcon: Icon(icon),
           contentPadding:
@@ -231,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           side: const BorderSide(
-              color: Color.fromARGB(114, 33, 149, 243), width: 1),
+              color: Color.fromRGBO(106, 169, 107, 0.573), width: 1),
           padding: const EdgeInsets.symmetric(
             vertical: 20,
           ),
@@ -278,7 +278,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           side: const BorderSide(
-              color: Color.fromARGB(114, 33, 149, 243), width: 1),
+              color: Color.fromRGBO(106, 169, 107, 0.573), width: 1),
           padding: const EdgeInsets.symmetric(
             vertical: 25,
           ),
@@ -315,7 +315,7 @@ class _LoginPageState extends State<LoginPage> {
             MediaQuery.sizeOf(context).width * 0.008,
           ),
         ),
-        backgroundColor: Colors.blue[300],
+        backgroundColor: Colors.green[300],
         padding: const EdgeInsets.symmetric(
           vertical: 20,
         ),
@@ -571,7 +571,8 @@ class _RegisterPageState extends State<RegisterPage> {
               borderRadius: BorderRadius.circular(
                   MediaQuery.sizeOf(context).width * borderRadius),
               borderSide: BorderSide.none),
-          fillColor: const Color.fromARGB(255, 0, 140, 255).withOpacity(0.2),
+          fillColor:
+              const Color.fromRGBO(106, 169, 107, 0.573).withOpacity(0.2),
           filled: true,
           prefixIcon: Icon(icon),
           contentPadding:
@@ -594,7 +595,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
           side: const BorderSide(
-              color: Color.fromARGB(114, 33, 149, 243), width: 1),
+              color: Color.fromRGBO(106, 169, 107, 0.573), width: 1),
           padding: const EdgeInsets.symmetric(
             vertical: 20,
           ),
@@ -641,7 +642,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
           side: const BorderSide(
-              color: Color.fromARGB(114, 33, 149, 243), width: 1),
+              color: Color.fromRGBO(106, 169, 107, 0.573), width: 1),
           padding: const EdgeInsets.symmetric(
             vertical: 25,
           ),
@@ -678,7 +679,7 @@ class _RegisterPageState extends State<RegisterPage> {
             MediaQuery.sizeOf(context).width * 0.008,
           ),
         ),
-        backgroundColor: Colors.blue[300],
+        backgroundColor: Colors.green[300],
         padding: const EdgeInsets.symmetric(
           vertical: 20,
         ),
