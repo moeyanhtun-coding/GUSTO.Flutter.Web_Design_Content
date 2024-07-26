@@ -136,7 +136,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
   Widget _buildUI() {
     return Scaffold(
-      backgroundColor: myDefaultBackground,
+      backgroundColor: Color.fromRGBO(214, 239, 216, 1),
       body: Row(
         children: [
           myDrawer,
@@ -217,7 +217,7 @@ class _CategoryPageState extends State<CategoryPage> {
               borderRadius: BorderRadius.circular(
                   MediaQuery.sizeOf(context).width * borderRadius),
               borderSide: BorderSide.none),
-          fillColor: const Color.fromARGB(255, 0, 140, 255).withOpacity(0.2),
+          fillColor: const Color.fromRGBO(26, 83, 25, 0.1),
           filled: true,
           prefixIcon: Icon(icon),
           contentPadding:
