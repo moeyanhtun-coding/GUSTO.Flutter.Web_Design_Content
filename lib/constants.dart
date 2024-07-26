@@ -50,7 +50,9 @@ Widget _listGroup() {
                 Get.toNamed("/contactUs");
               }),
               _margin(0, 0.005, context),
-              _listItem(6, "S E T T I N G", Icons.settings, () {}),
+              _listItem(6, "A B O U T  U S", Icons.settings, () {
+                Get.toNamed("/aboutUs");
+              }),
             ],
           ),
         ),
