@@ -6,6 +6,7 @@ import 'package:flutter_web_responsive/view/detail_page.dart';
 import 'package:flutter_web_responsive/view/favorite_page.dart';
 import 'package:flutter_web_responsive/view/home_page.dart';
 import 'package:flutter_web_responsive/view/login_page.dart';
+import 'package:flutter_web_responsive/view/service_page.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
     GetPage(name: "/favorite", page: () => FavoritePage()),
     GetPage(name: "/home", page: () => HomePage()),
     GetPage(name: "/aboutUs", page: () => AboutUs()),
+    GetPage(name: "/service", page: () => ServicePage())
   ];
   MyApp({super.key});
 
