@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_responsive/constants.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 final List<String> imgList = [
   "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -14,6 +17,75 @@ final List<String> imgList = [
   "https://images.pexels.com/photos/209315/pexels-photo-209315.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 ];
 
+final List<String> priceList = [
+  '300,000 MMK/month',
+  '350,000 MMK/month',
+  '400,000 MMK/month',
+  '450,000 MMK/month',
+  '500,000 MMK/month',
+  '550,000 MMK/month',
+  '600,000 MMK/month',
+  '650,000 MMK/month',
+  '700,000 MMK/month',
+  '750,000 MMK/month',
+  '800,000 MMK/month',
+  '850,000 MMK/month',
+  '900,000 MMK/month',
+  '950,000 MMK/month',
+  '1,000,000 MMK/month',
+  '1,100,000 MMK/month',
+  '1,200,000 MMK/month',
+  '1,300,000 MMK/month',
+  '1,400,000 MMK/month',
+  '1,500,000 MMK/month'
+];
+
+final List<String> typeList = [
+  'Apartment',
+  'Condominium',
+  'Detached House',
+  'Townhouse',
+  'Studio',
+  'Penthouse',
+  'Bungalow',
+  'Cottage',
+  'Villa',
+  'Mansion',
+  'Apartment',
+  'Condominium',
+  'Detached House',
+  'Townhouse',
+  'Studio',
+  'Penthouse',
+  'Bungalow',
+  'Cottage',
+  'Villa',
+  'Mansion'
+];
+
+final List<String> locationList = [
+  'Yangon, Kamayut Township',
+  'Yangon, Dagon Township',
+  'Yangon, Bahan Township',
+  'Yangon, Hlaing Township',
+  'Yangon, Mayangone Township',
+  'Yangon, Tamwe Township',
+  'Mandalay, Chanayethazan Township',
+  'Mandalay, Chanmyathazi Township',
+  'Mandalay, Mahaaungmye Township',
+  'Mandalay, Pyigyidagun Township',
+  'Naypyidaw, Zabuthiri Township',
+  'Naypyidaw, Ottarathiri Township',
+  'Naypyidaw, Dekkhinathiri Township',
+  'Naypyidaw, Pobbathiri Township',
+  'Bago, Bago Township',
+  'Pathein, Pathein Township',
+  'Taunggyi, Taunggyi Township',
+  'Mawlamyine, Mawlamyine Township',
+  'Sittwe, Sittwe Township',
+  'Myitkyina, Myitkyina Township'
+];
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -25,7 +97,8 @@ class _HomePageState extends State<HomePage> {
   int _currentPage = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildUI());
+    return Scaffold(
+        backgroundColor: Color.fromRGBO(214, 239, 216, 0.6), body: _buildUI());
   }
 
   Widget _buildUI() {
@@ -37,33 +110,79 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _container() {
-    return Container(
-      color: Colors.black,
-      child: Stack(
-        children: <Widget>[
-          // Background image with opacity
-          Opacity(
-            opacity: 0.5, // Adjust the opacity as needed
-            child: Image.network(
-              'https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=800', // Replace with your image URL
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
-            ),
+  Widget _homeRow5() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(width: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            'Experience the serenity and comfort you deserve. Meet us at your perfect retreat today. Our team waiting you.',
+            textAlign: TextAlign.center,
+            style:
+                TextStyle(color: Colors.grey[800], fontWeight: FontWeight.bold),
           ),
-          // Text on top of the background image
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(
+                Icons.facebook,
+                color: Color.fromARGB(255, 1, 115, 209),
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.instagram,
+                color: Colors.redAccent,
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.twitter,
+                color: Colors.blueAccent,
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _container() {
+    return ListView(
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Margin(width: 0, height: 90),
+            _homePageRow1(),
+            Margin(width: 0, height: 50),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Margin(width: 0, height: 90),
-                _homePageRow1(),
+                _homeText("For", 25, FontWeight.normal, Colors.grey.shade900),
+                Margin(width: 10, height: 0),
+                _homeText("Rent", 25, FontWeight.w900, Colors.grey.shade900),
+                Margin(width: 10, height: 0),
+                _homeText("Feature", 25, FontWeight.w900, Colors.green),
+                Margin(width: 10, height: 0),
+                _homeText(
+                    "Properties", 25, FontWeight.w900, Colors.grey.shade900),
               ],
             ),
-          ),
-        ],
-      ),
+            Margin(width: 0, height: 30),
+            _homeRow3(),
+            _homeRow4(),
+            _homeRow5()
+          ],
+        ),
+      ],
     );
   }
 
@@ -72,6 +191,7 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
       child: Row(
         children: [
+          Margin(width: 50, height: 0),
           Expanded(child: _textColumn()),
           Expanded(child: _carouselImage()),
         ],
@@ -79,25 +199,77 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _textColumn() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _homeRow3() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _homeText("Find Real Estate", 80, FontWeight.bold),
-        _homeText("And Get Your", 80, FontWeight.bold),
-        _homeText("Dream Space", 80, FontWeight.bold)
+        Container(
+          width: 400,
+          child: CardItem(
+            cardImage: imgList[6],
+            itemPrice: priceList[3],
+            itemLocation: locationList[9],
+            itemType: typeList[5],
+          ),
+        ),
+        Container(
+          width: 400,
+          child: CardItem(
+            cardImage: imgList[4],
+            itemPrice: priceList[9],
+            itemLocation: locationList[2],
+            itemType: typeList[6],
+          ),
+        ),
+        Container(
+          width: 400,
+          child: CardItem(
+            cardImage: imgList[2],
+            itemPrice: priceList[7],
+            itemLocation: locationList[2],
+            itemType: typeList[3],
+          ),
+        ),
       ],
     );
   }
 
-  Widget _homeText(String text, double size, FontWeight weight) {
+  Widget _textColumn() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            _homeText("The Best", 20, FontWeight.w900, Colors.grey.shade900),
+            Margin(width: 10, height: 0),
+            _homeText("Choice", 20, FontWeight.w900, Colors.green),
+            Margin(width: 10, height: 0),
+            _homeText("For You!", 20, FontWeight.w900, Colors.grey.shade900),
+          ],
+        ),
+        Row(
+          children: [
+            _homeText("Find The", 70, FontWeight.w900, Colors.grey.shade900),
+            Margin(width: 15, height: 0),
+            _homeText("Home", 70, FontWeight.w900, Colors.green)
+          ],
+        ),
+        _homeText(
+            "To Your Perfect ", 70, FontWeight.w900, Colors.grey.shade900),
+        _homeText("Retreat", 70, FontWeight.w900, Colors.green)
+      ],
+    );
+  }
+
+  Widget _homeText(String text, double size, FontWeight weight, Color color) {
     return Text(
       text,
       style: TextStyle(
-          fontSize: size,
-          fontWeight: weight,
-          color: Color.fromRGBO(214, 239, 216, 1),
-          decoration: TextDecoration.none),
+        fontSize: size,
+        fontWeight: weight,
+        color: color,
+        decoration: TextDecoration.none,
+      ),
     );
   }
 
@@ -133,6 +305,349 @@ class _HomePageState extends State<HomePage> {
               }),
         ),
       ],
+    );
+  }
+
+  Widget _homeRow4() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text(
+            'One of the customer reviews',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16, width: 300),
+          // Container(
+          //   padding: const EdgeInsets.all(16),
+          //   color: Colors.black,
+          //   child: const Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       Text(
+          //         'What a good website. It\'s very helpful for me.',
+          //         style: TextStyle(color: Colors.white, fontSize: 16),
+          //       ),
+          //       SizedBox(height: 8),
+          //       Align(
+          //         alignment: Alignment.bottomRight,
+          //         child: Text(
+          //           'by Htet Paing',
+          //           style: TextStyle(color: Colors.white, fontSize: 16),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          _comment(
+              "https://images.pexels.com/photos/428364/pexels-photo-428364.jpeg?auto=compress&cs=tinysrgb&w=600"),
+        ],
+      ),
+    );
+  }
+}
+
+Widget _comment(String image) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 8),
+    child: Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5), // Shadow color
+            spreadRadius: 3, // Spread radius
+            blurRadius: 7, // Blur radius
+            offset: Offset(0, 3), // Offset in x and y direction
+          ),
+        ],
+        color: const Color.fromARGB(255, 255, 255, 255),
+        borderRadius:
+            BorderRadius.circular(16.0), // Adjust the radius as needed
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CircleAvatar(
+              backgroundImage: NetworkImage(image),
+              radius: 20,
+            ),
+            Margin(width: 10, height: 0),
+            _nameAndCmd(
+                "Htet Paing", "What a good website. It's very helpful for me."),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _nameAndCmd(String name, String cmd) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        name,
+        style: const TextStyle(
+          color: Colors.black,
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      Text(
+        cmd,
+        style: const TextStyle(
+          color: Colors.grey,
+          fontSize: 15,
+        ),
+      )
+    ],
+  );
+}
+
+// Padding(
+//               padding: const EdgeInsets.all(16.0),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 children: [
+//                   Text(
+//                     'For Rent Feature Properties',
+//                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+//                   ),
+//                   SizedBox(height: 16),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                     children: [
+//                       PropertyCard(),
+//                       PropertyCard(),
+//                       PropertyCard(),
+//                     ],
+//                   ),
+//                 ],
+//               ),
+//             ),
+//             SizedBox(height: 32),
+//             Padding(
+//               padding: const EdgeInsets.all(16.0),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 children: [
+//                   Text(
+//                     'One of the customer reviews',
+//                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//                   ),
+//                   SizedBox(height: 16, width: 300),
+//                   Container(
+//                     padding: EdgeInsets.all(16),
+//                     color: Colors.black,
+//                     child: Column(
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: [
+//                         Text(
+//                           'What a good website. It\'s very helpful for me.',
+//                           style: TextStyle(color: Colors.white, fontSize: 16),
+//                         ),
+//                         SizedBox(height: 8),
+//                         Align(
+//                           alignment: Alignment.bottomRight,
+//                           child: Text(
+//                             'by Htet Paing',
+//                             style: TextStyle(color: Colors.white, fontSize: 16),
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//             SizedBox(height: 32),
+//             Row(
+//               children: [
+//                 SizedBox(width: 16),
+//                 Padding(
+//                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+//                   child: Text(
+//                     'Experience the serenity and comfort you deserve. Meet us at your perfect retreat today. Our team waiting you.',
+//                     textAlign: TextAlign.center,
+//                     style: TextStyle(color: Colors.grey[600]),
+//                   ),
+//                 ),
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     IconButton(
+//                       icon: Icon(Icons.facebook),
+//                       onPressed: () {},
+//                     ),
+//                     IconButton(
+//                       icon: FaIcon(FontAwesomeIcons.instagram),
+//                       onPressed: () {},
+//                     ),
+//                     IconButton(
+//                       icon: FaIcon(FontAwesomeIcons.twitter),
+//                       onPressed: () {},
+//                     ),
+//                   ],
+//                 ),
+
+//               ],
+//             ),
+//             SizedBox(width: 16),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class PropertyCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        children: [
+          Container(
+            height: 100,
+            width: 100,
+            color: Colors.grey[400],
+            child: Center(
+              child: Text('Photo'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              '21 Lakhs\nThis Vista condo for rent\n33/A, Thamardi Road\n(4), Sa/Ka Bls.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CardItem extends StatefulWidget {
+  String cardImage;
+  String itemPrice;
+  String itemType;
+  String itemLocation;
+
+  CardItem({
+    super.key,
+    required this.cardImage,
+    required this.itemPrice,
+    required this.itemLocation,
+    required this.itemType,
+  });
+
+  @override
+  State<CardItem> createState() => _CardItemState();
+}
+
+class _CardItemState extends State<CardItem> {
+  bool isFavorite = false;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(3.0),
+      child: InkWell(
+        onTap: () {
+          Get.toNamed("/detail");
+        },
+        child: Card(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Container(
+            width: double.infinity,
+            height: 310,
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        widget.cardImage,
+                        height: MediaQuery.sizeOf(context).height * 0.19,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      top: 10,
+                      right: 10,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        color: Colors.orange,
+                        child: const Text(
+                          "Avaliable",
+                          style: TextStyle(
+                              fontSize: 9, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  widget.itemPrice,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(26, 83, 25, 1),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.itemType,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      "Buy / Rent",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(26, 83, 25, 1),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.itemLocation,
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 80, 78, 78),
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
