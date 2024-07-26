@@ -147,16 +147,14 @@ class _ContactUsState extends State<ContactUs> {
       children: [
         Icon(
           Icons.location_pin,
-          color: Colors.blueAccent,
+          color: Colors.green,
           size: 30,
         ),
         Margin(width: 10, height: 0),
         Text(
           "Our Location",
           style: TextStyle(
-              fontSize: 20,
-              color: Colors.blueAccent,
-              fontWeight: FontWeight.bold),
+              fontSize: 20, color: Colors.green, fontWeight: FontWeight.bold),
         ),
       ],
     );
@@ -245,7 +243,7 @@ class _ContactUsState extends State<ContactUs> {
             ),
           ),
           side: const BorderSide(
-              color: Color.fromARGB(114, 33, 149, 243), width: 1),
+              color: Color.fromRGBO(106, 169, 107, 0.573), width: 1),
           padding: const EdgeInsets.symmetric(
             vertical: 20,
           ),
@@ -291,7 +289,7 @@ class _ContactUsState extends State<ContactUs> {
               MediaQuery.sizeOf(context).width * 0.008,
             ),
           ),
-          backgroundColor: Colors.blue[400],
+          backgroundColor: Colors.green[400],
           padding: const EdgeInsets.symmetric(
             vertical: 20,
           ),
