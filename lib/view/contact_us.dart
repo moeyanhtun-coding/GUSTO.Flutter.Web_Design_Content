@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_web_responsive/constants.dart';
-import 'package:flutter_map/flutter_map.dart' as flutterMap;
-import 'package:get/get.dart';
+// ignore: library_prefixes
 import 'package:latlong2/latlong.dart' as latLng;
 
-final List<latLng.LatLng> locations = [
+const List<latLng.LatLng> locations = [
   latLng.LatLng(16.77679310121505, 96.228678157696) // Yangon, Kamayut Township
 ];
 
@@ -20,7 +18,7 @@ class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(214, 239, 216, 1),
+      backgroundColor: const Color.fromRGBO(214, 239, 216, 1),
       body: _buildUI(),
     );
   }
@@ -90,12 +88,12 @@ class _ContactUsState extends State<ContactUs> {
             Icon(
               icon,
               size: 26,
-              color: Color.fromRGBO(214, 239, 216, 1),
+              color: const Color.fromRGBO(214, 239, 216, 1),
             ),
             Margin(width: 10, height: 0),
             Text(
               name,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color.fromRGBO(214, 239, 216, 1),
                 fontSize: 20,
               ),
@@ -104,7 +102,7 @@ class _ContactUsState extends State<ContactUs> {
         ),
         Text(
           info,
-          style: TextStyle(
+          style: const TextStyle(
             color: Color.fromRGBO(214, 239, 216, 1),
             fontSize: 15,
           ),
@@ -118,15 +116,15 @@ class _ContactUsState extends State<ContactUs> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Margin(width: 0, height: 30),
-        Text(
-          "Contact Us",
+        const Text(
+          "C O N T A C T",
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
         Expanded(child: _contactGroup(Colors.black)),
         _location(),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-          child: Container(
+        const Padding(
+          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+          child: SizedBox(
             width: double.infinity,
             height: 250,
             child: CommonMapWidget(
@@ -145,16 +143,16 @@ class _ContactUsState extends State<ContactUs> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
+        const Icon(
           Icons.location_pin,
-          color: Colors.green,
+          color: Colors.black,
           size: 30,
         ),
         Margin(width: 10, height: 0),
-        Text(
-          "Our Location",
+        const Text(
+          "L O C A T I O N",
           style: TextStyle(
-              fontSize: 20, color: Colors.green, fontWeight: FontWeight.bold),
+              fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ],
     );
@@ -167,21 +165,19 @@ class _ContactUsState extends State<ContactUs> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Container(
-            child: Column(
-              children: [
-                CustomInputField(formName: "Name", icon: Icons.person),
-                Margin(width: 0, height: 15),
-                CustomInputField(formName: "Email", icon: Icons.mail),
-                Margin(width: 0, height: 15),
-                CustomInputField(formName: "Phone", icon: Icons.phone),
-                Margin(width: 0, height: 15),
-                CustomInputField(formName: "Subject", icon: Icons.subject),
-                Margin(width: 0, height: 15),
-                _textArea("Message", Icons.message),
-                _buttonGroup()
-              ],
-            ),
+          Column(
+            children: [
+              const CustomInputField(formName: "Name", icon: Icons.person),
+              Margin(width: 0, height: 15),
+              const CustomInputField(formName: "Email", icon: Icons.mail),
+              Margin(width: 0, height: 15),
+              const CustomInputField(formName: "Phone", icon: Icons.phone),
+              Margin(width: 0, height: 15),
+              const CustomInputField(formName: "Subject", icon: Icons.subject),
+              Margin(width: 0, height: 15),
+              _textArea("Message", Icons.message),
+              _buttonGroup()
+            ],
           ),
         ],
       ),
@@ -203,7 +199,7 @@ class _ContactUsState extends State<ContactUs> {
               ),
               borderSide: BorderSide.none,
             ),
-            fillColor: Color.fromRGBO(106, 169, 107, 0.573),
+            fillColor: const Color.fromRGBO(106, 169, 107, 0.573),
             filled: true,
             contentPadding: const EdgeInsets.fromLTRB(40, 20, 20, 20),
           ),
@@ -213,7 +209,7 @@ class _ContactUsState extends State<ContactUs> {
           left: 8,
           child: Icon(
             icon,
-            color: Color.fromARGB(255, 79, 79, 79),
+            color: const Color.fromARGB(255, 79, 79, 79),
           ),
         ),
       ],
@@ -257,14 +253,14 @@ class _ContactUsState extends State<ContactUs> {
             Icon(
               icon,
               size: 30,
-              color: Color.fromRGBO(26, 83, 25, 1),
+              color: const Color.fromRGBO(26, 83, 25, 1),
             ),
             const SizedBox(
               width: 10,
             ),
-            Text(
+            const Text(
               "Contact Now",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 15,
                 color: Color.fromRGBO(26, 83, 25, 1),
                 fontWeight: FontWeight.w900,
@@ -292,23 +288,23 @@ class _ContactUsState extends State<ContactUs> {
             vertical: 20,
           ),
         ),
-        child: Row(
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(
+            SizedBox(
               width: 10,
             ),
             Icon(
               Icons.message,
               size: 30,
-              color: const Color.fromRGBO(26, 83, 25, 1),
+              color: Color.fromRGBO(26, 83, 25, 1),
             ),
-            const SizedBox(
+            SizedBox(
               width: 10,
             ),
             Text(
               "Send Message",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 15,
                 color: Colors.black,
                 fontWeight: FontWeight.w900,
