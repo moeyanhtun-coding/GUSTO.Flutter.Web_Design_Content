@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/flutter_map.dart' as flutterMap;
 import 'package:latlong2/latlong.dart' as latLng;
 
@@ -22,7 +20,6 @@ var myDrawer = Drawer(
     ],
   ),
 );
-
 Widget _listGroup() {
   return Builder(
     builder: (context) {
@@ -33,36 +30,27 @@ Widget _listGroup() {
             children: [
               _listItem(0, "H O M E", Icons.home, () {
                 Get.toNamed("/home");
-              }),
+              }, "/home"),
               _margin(0, 0.005, context),
               _listItem(1, "F A V O R I T E", Icons.favorite, () {
                 Get.toNamed("/favorite");
-              }),
+              }, "/favorite"),
               _margin(0, 0.005, context),
               _listItem(2, "S E R V I C E S", Icons.person, () {
                 Get.toNamed("/service");
-              }),
+              }, "/service"),
               _margin(0, 0.005, context),
               _listItem(3, "S E A R C H", Icons.search, () {
                 Get.toNamed("/category");
-              }),
+              }, "/category"),
               _margin(0, 0.005, context),
               _listItem(4, "C O N T A C T S  U S", Icons.contact_mail, () {
                 Get.toNamed("/contactUs");
-              }),
+              }, "/contactUs"),
               _margin(0, 0.005, context),
               _listItem(6, "A B O U T   U S", Icons.announcement_rounded, () {
                 Get.toNamed("/aboutUs");
-              }),
-              _margin(0, 0.005, context),
-              _listItem(7, "B U Y", Icons.production_quantity_limits_rounded,
-                  () {
-                Get.toNamed("/category");
-              }),
-              _margin(0, 0.005, context),
-              _listItem(8, "R E N T", Icons.house, () {
-                Get.toNamed("/category");
-              }),
+              }, "/aboutUs"),
             ],
           ),
         ),
@@ -148,12 +136,14 @@ class _ListItem extends StatefulWidget {
   final String title;
   final IconData icon;
   final Function() tap;
+  final String route;
 
   const _ListItem({
     required this.index,
     required this.icon,
     required this.title,
     required this.tap,
+    required this.route,
   });
 
   @override
@@ -165,6 +155,8 @@ class __ListItemState extends State<_ListItem> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isSelected = Get.currentRoute == widget.route;
+
     return MouseRegion(
       onEnter: (_) {
         setState(() {
@@ -176,32 +168,41 @@ class __ListItemState extends State<_ListItem> {
           _hovering[widget.index] = false;
         });
       },
-      child: ListTile(
-        leading: Icon(
-          widget.icon,
-          color: _hovering[widget.index] == true
-              ? Color.fromRGBO(26, 83, 25, 0.839)
-              : Colors.black,
-          size: 20,
+      child: Container(
+        color: isSelected
+            ? const Color.fromRGBO(135, 232, 143, 0.605)
+            : _hovering[widget.index] == true
+                ? const Color.fromRGBO(214, 239, 216, 0.6)
+                : Colors.transparent,
+        child: ListTile(
+          leading: Icon(
+            widget.icon,
+            color: _hovering[widget.index] == true
+                ? const Color.fromRGBO(26, 83, 25, 0.839)
+                : Colors.black,
+            size: 20,
+          ),
+          title: Text(widget.title,
+              style: TextStyle(
+                  color: _hovering[widget.index] == true
+                      ? const Color.fromRGBO(26, 83, 25, 0.839)
+                      : Colors.black,
+                  fontSize: 15)),
+          onTap: widget.tap,
         ),
-        title: Text(widget.title,
-            style: TextStyle(
-                color: _hovering[widget.index] == true
-                    ? Color.fromRGBO(26, 83, 25, 0.839)
-                    : Colors.black,
-                fontSize: 15)),
-        onTap: widget.tap,
       ),
     );
   }
 }
 
-Widget _listItem(int index, String title, IconData icon, Function() tap) {
+Widget _listItem(
+    int index, String title, IconData icon, Function() tap, String route) {
   return _ListItem(
     index: index,
     icon: icon,
     title: title,
     tap: tap,
+    route: route,
   );
 }
 
@@ -215,6 +216,7 @@ Widget _logoutd() {
       () {
         Get.offAllNamed("/login");
       },
+      "/login",
     ),
   );
 }
@@ -230,6 +232,7 @@ Widget _margin(
   );
 }
 
+// ignore: must_be_immutable
 class CardItem extends StatefulWidget {
   String cardImage;
   String itemPrice;
@@ -376,12 +379,12 @@ class CommonMapWidget extends StatelessWidget {
   final List<latLng.LatLng> markerPoints;
 
   const CommonMapWidget({
-    Key? key,
+    super.key,
     required this.widthFactor,
     required this.initialCenter,
     required this.initialZoom,
     required this.markerPoints,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -424,6 +427,7 @@ class CommonMapWidget extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class Margin extends StatelessWidget {
   double width;
   double height;
@@ -448,10 +452,10 @@ class CustomInputField extends StatelessWidget {
   final IconData icon;
 
   const CustomInputField({
-    Key? key,
+    super.key,
     required this.formName,
     required this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -478,7 +482,8 @@ class CustomDropdown extends StatelessWidget {
   final List<String> items;
   final ValueChanged<String?> onChanged;
 
-  CustomDropdown({
+  const CustomDropdown({
+    super.key,
     required this.value,
     required this.items,
     required this.onChanged,
@@ -488,10 +493,10 @@ class CustomDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       value: value,
-      icon: Icon(Icons.arrow_downward),
+      icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 16,
-      style: TextStyle(color: Colors.deepPurple),
+      style: const TextStyle(color: Colors.deepPurple),
       underline: Container(
         height: 2,
         color: Colors.deepPurpleAccent,
