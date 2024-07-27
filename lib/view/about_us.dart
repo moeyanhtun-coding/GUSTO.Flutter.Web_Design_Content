@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_responsive/constants.dart';
@@ -23,11 +22,11 @@ class AboutUs extends StatefulWidget {
 }
 
 class _AboutUsState extends State<AboutUs> {
-  int _currentPage = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(214, 239, 216, 0.6), body: _buildUI());
+        backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+        body: _buildUI());
   }
 
   Widget _buildUI() {
@@ -40,26 +39,24 @@ class _AboutUsState extends State<AboutUs> {
   }
 
   Widget _container() {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Margin(width: 0, height: 70),
-              Row(
-                children: [
-                  Margin(width: 30, height: 0),
-                  Expanded(child: _textRow2()),
-                  Expanded(child: _carouselImage()),
-                ],
-              ),
-              Margin(width: 0, height: 30),
-              _textRow()
-            ],
-          ),
-        ],
-      ),
+    return Stack(
+      children: <Widget>[
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Margin(width: 0, height: 70),
+            Row(
+              children: [
+                Margin(width: 30, height: 0),
+                Expanded(child: _textRow2()),
+                Expanded(child: _carouselImage()),
+              ],
+            ),
+            Margin(width: 0, height: 30),
+            _textRow()
+          ],
+        ),
+      ],
     );
   }
 
@@ -113,34 +110,32 @@ class _AboutUsState extends State<AboutUs> {
   ) {
     return Padding(
       padding: const EdgeInsets.all(40.0),
-      child: Container(
-        child: Column(
-          children: [
-            CircleAvatar(
-              backgroundImage: NetworkImage(img),
-              radius: 50,
-              backgroundColor: Colors.transparent,
+      child: Column(
+        children: [
+          CircleAvatar(
+            backgroundImage: NetworkImage(img),
+            radius: 50,
+            backgroundColor: Colors.transparent,
+          ),
+          Text(
+            text,
+            style: const TextStyle(
+              decoration: TextDecoration.none,
+              fontSize: 30,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
-            Text(
-              text,
-              style: TextStyle(
-                decoration: TextDecoration.none,
-                fontSize: 30,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
+          ),
+          Text(
+            text1,
+            style: const TextStyle(
+              decoration: TextDecoration.none,
+              fontSize: 15,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
-            Text(
-              text1,
-              style: TextStyle(
-                decoration: TextDecoration.none,
-                fontSize: 15,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -171,9 +166,7 @@ class _AboutUsState extends State<AboutUs> {
             enlargeCenterPage: true,
             enlargeFactor: 0.5,
             onPageChanged: (value, _) {
-              setState(() {
-                _currentPage = value;
-              });
+              setState(() {});
             },
           ),
         ),
