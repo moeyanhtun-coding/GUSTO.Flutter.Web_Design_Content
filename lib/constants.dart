@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_map/flutter_map.dart' as flutterMap;
 import 'package:latlong2/latlong.dart' as latLng;
@@ -60,15 +61,19 @@ Widget _listGroup() {
 }
 
 Widget _drawerHeader() {
-  return const DrawerHeader(
+  return DrawerHeader(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(Icons.house),
+        SvgPicture.asset(
+          'assets/svg/logo.svg',
+          width: 80.0,
+          allowDrawingOutsideViewBox: true,
+        ),
         SizedBox(
           width: 20,
         ),
-        Text("House Heaven"),
+        Text("H O M E  H E A V E N"),
       ],
     ),
   );
