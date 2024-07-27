@@ -64,7 +64,16 @@ class _ServicePageState extends State<ServicePage> {
         ),
         Margin(width: 0, height: 70),
         _serviceRow2(),
-        Margin(width: 0, height: 80),
+        Margin(width: 0, height: 50),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 100),
+          child: Container(
+            width: double.infinity,
+            height: 1,
+            color: Color.fromARGB(255, 139, 139, 139),
+          ),
+        ),
+        Margin(width: 0, height: 30),
         _homeRow5()
       ],
     );
