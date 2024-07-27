@@ -1,6 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_responsive/view/about_us.dart';
+import 'package:flutter_web_responsive/view/about_uss.dart';
 import 'package:flutter_web_responsive/view/category_page.dart';
 import 'package:flutter_web_responsive/view/contact_us.dart';
 import 'package:flutter_web_responsive/view/detail_page.dart';
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     GetPage(name: "/contactUs", page: () => ContactUs()),
     GetPage(name: "/favorite", page: () => FavoritePage()),
     GetPage(name: "/home", page: () => HomePage()),
-    GetPage(name: "/aboutUs", page: () => AboutUs()),
+    GetPage(name: "/aboutUs", page: () => AboutUss()),
     GetPage(name: "/service", page: () => ServicePage())
   ];
   MyApp({super.key});
