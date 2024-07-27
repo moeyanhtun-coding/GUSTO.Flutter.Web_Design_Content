@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_responsive/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 final List<String> imgList = [
   "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -23,11 +25,11 @@ class ServicePage extends StatefulWidget {
 }
 
 class _ServicePageState extends State<ServicePage> {
-  int _currentPage = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(214, 239, 216, 0.6), body: _buildUI());
+        backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+        body: _buildUI());
   }
 
   Widget _buildUI() {
@@ -61,7 +63,53 @@ class _ServicePageState extends State<ServicePage> {
           ],
         ),
         Margin(width: 0, height: 70),
-        _serviceRow2()
+        _serviceRow2(),
+        Margin(width: 0, height: 80),
+        _homeRow5()
+      ],
+    );
+  }
+
+  Widget _homeRow5() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(width: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            'Experience the serenity and comfort you deserve. Meet us at your perfect retreat today. Our team waiting you.',
+            textAlign: TextAlign.center,
+            style:
+                TextStyle(color: Colors.grey[800], fontWeight: FontWeight.bold),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.facebook,
+                color: Color.fromARGB(255, 1, 115, 209),
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const FaIcon(
+                FontAwesomeIcons.instagram,
+                color: Colors.redAccent,
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const FaIcon(
+                FontAwesomeIcons.twitter,
+                color: Colors.blueAccent,
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -70,10 +118,11 @@ class _ServicePageState extends State<ServicePage> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          Expanded(child: _carouselImage()),
           Margin(width: 100, height: 0),
           Expanded(child: _textColumn()),
-          Expanded(child: _carouselImage()),
         ],
       ),
     );
@@ -83,8 +132,13 @@ class _ServicePageState extends State<ServicePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _homeText(
-            "The Best Choice For You!", 20, FontWeight.w900, Colors.green),
+        Row(
+          children: [
+            _homeText("The Best ", 20, FontWeight.w900, Colors.grey.shade900),
+            _homeText("Choice ", 20, FontWeight.w900, Colors.green),
+            _homeText("For You!", 20, FontWeight.w900, Colors.grey.shade900),
+          ],
+        ),
         _homeText("Choose The", 70, FontWeight.w900, Colors.grey.shade900),
         Row(
           children: [
@@ -102,7 +156,7 @@ class _ServicePageState extends State<ServicePage> {
           Colors.grey.shade600,
         ),
         Margin(width: 0, height: 20),
-        _contactButton()
+        _contactButton(),
       ],
     );
   }
@@ -110,34 +164,29 @@ class _ServicePageState extends State<ServicePage> {
   Widget _serviceRow2() {
     return Row(
       children: [
+        Margin(width: 90, height: 0),
         Expanded(
           child: _serviceCard(
             "assets/svg/conversation.svg",
             "Free Consulting",
-            "For your house need",
+            "Get expert advice for all your housing \nneeds with our free consulting service.",
           ),
         ),
         Expanded(
           child: _serviceCard(
-            "assets/svg/conversation.svg",
-            "Free Consulting",
-            "For your house need",
+            "assets/svg/contract.svg",
+            "Contract Service",
+            "Ensure smooth transactions with our \nprofessional contract services.",
           ),
         ),
         Expanded(
           child: _serviceCard(
-            "assets/svg/conversation.svg",
-            "Free Consulting",
-            "For your house need",
+            "assets/svg/transportation.svg",
+            "Transportation Service",
+            "Make your move hassle-free with \nour reliable transportation services.",
           ),
         ),
-        Expanded(
-          child: _serviceCard(
-            "assets/svg/conversation.svg",
-            "Free Consulting",
-            "For your house need",
-          ),
-        ),
+        Margin(width: 90, height: 0),
       ],
     );
   }
@@ -160,7 +209,7 @@ class _ServicePageState extends State<ServicePage> {
               text1,
               style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
                 color: Colors.grey.shade900,
               ),
             ),
@@ -216,9 +265,7 @@ class _ServicePageState extends State<ServicePage> {
             enlargeCenterPage: true,
             enlargeFactor: 0.5,
             onPageChanged: (value, _) {
-              setState(() {
-                _currentPage = value;
-              });
+              setState(() {});
             },
           ),
         ),
@@ -248,7 +295,7 @@ class _ServicePageState extends State<ServicePage> {
           ),
         ),
         onPressed: () {
-          // some method calls
+          Get.toNamed("/contactUs");
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

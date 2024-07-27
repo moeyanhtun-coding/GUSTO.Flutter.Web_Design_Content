@@ -94,11 +94,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentPage = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(214, 239, 216, 0.6), body: _buildUI());
+        backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+        body: _buildUI());
   }
 
   Widget _buildUI() {
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
@@ -128,21 +128,21 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.facebook,
                 color: Color.fromARGB(255, 1, 115, 209),
               ),
               onPressed: () {},
             ),
             IconButton(
-              icon: FaIcon(
+              icon: const FaIcon(
                 FontAwesomeIcons.instagram,
                 color: Colors.redAccent,
               ),
               onPressed: () {},
             ),
             IconButton(
-              icon: FaIcon(
+              icon: const FaIcon(
                 FontAwesomeIcons.twitter,
                 color: Colors.blueAccent,
               ),
@@ -191,9 +191,10 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
       child: Row(
         children: [
-          Margin(width: 50, height: 0),
+          Margin(width: 100, height: 0),
           Expanded(child: _textColumn()),
           Expanded(child: _carouselImage()),
+          Margin(width: 130, height: 0),
         ],
       ),
     );
@@ -203,7 +204,7 @@ class _HomePageState extends State<HomePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Container(
+        SizedBox(
           width: 400,
           child: CardItem(
             cardImage: imgList[6],
@@ -212,7 +213,7 @@ class _HomePageState extends State<HomePage> {
             itemType: typeList[5],
           ),
         ),
-        Container(
+        SizedBox(
           width: 400,
           child: CardItem(
             cardImage: imgList[4],
@@ -221,7 +222,7 @@ class _HomePageState extends State<HomePage> {
             itemType: typeList[6],
           ),
         ),
-        Container(
+        SizedBox(
           width: 400,
           child: CardItem(
             cardImage: imgList[2],
@@ -240,17 +241,14 @@ class _HomePageState extends State<HomePage> {
       children: [
         Row(
           children: [
-            _homeText("The Best", 20, FontWeight.w900, Colors.grey.shade900),
-            Margin(width: 10, height: 0),
-            _homeText("Choice", 20, FontWeight.w900, Colors.green),
-            Margin(width: 10, height: 0),
+            _homeText("The Best ", 20, FontWeight.w900, Colors.grey.shade900),
+            _homeText("Choice ", 20, FontWeight.w900, Colors.green),
             _homeText("For You!", 20, FontWeight.w900, Colors.grey.shade900),
           ],
         ),
         Row(
           children: [
-            _homeText("Find The", 70, FontWeight.w900, Colors.grey.shade900),
-            Margin(width: 15, height: 0),
+            _homeText("Find The ", 70, FontWeight.w900, Colors.grey.shade900),
             _homeText("Home", 70, FontWeight.w900, Colors.green)
           ],
         ),
@@ -299,9 +297,7 @@ class _HomePageState extends State<HomePage> {
               enlargeCenterPage: true,
               enlargeFactor: 0.5,
               onPageChanged: (value, _) {
-                setState(() {
-                  _currentPage = value;
-                });
+                setState(() {});
               }),
         ),
       ],
@@ -314,32 +310,16 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
-            'One of the customer reviews',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _homeText("One of the customers", 20, FontWeight.bold,
+                  Colors.grey.shade900),
+              Margin(width: 10, height: 0),
+              _homeText("Service", 20, FontWeight.w900, Colors.green)
+            ],
           ),
           const SizedBox(height: 16, width: 300),
-          // Container(
-          //   padding: const EdgeInsets.all(16),
-          //   color: Colors.black,
-          //   child: const Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       Text(
-          //         'What a good website. It\'s very helpful for me.',
-          //         style: TextStyle(color: Colors.white, fontSize: 16),
-          //       ),
-          //       SizedBox(height: 8),
-          //       Align(
-          //         alignment: Alignment.bottomRight,
-          //         child: Text(
-          //           'by Htet Paing',
-          //           style: TextStyle(color: Colors.white, fontSize: 16),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
           _comment(
               "https://images.pexels.com/photos/428364/pexels-photo-428364.jpeg?auto=compress&cs=tinysrgb&w=600"),
         ],
@@ -358,7 +338,7 @@ Widget _comment(String image) {
             color: Colors.grey.withOpacity(0.5), // Shadow color
             spreadRadius: 3, // Spread radius
             blurRadius: 7, // Blur radius
-            offset: Offset(0, 3), // Offset in x and y direction
+            offset: const Offset(0, 3), // Offset in x and y direction
           ),
         ],
         color: const Color.fromARGB(255, 255, 255, 255),
@@ -407,103 +387,9 @@ Widget _nameAndCmd(String name, String cmd) {
   );
 }
 
-// Padding(
-//               padding: const EdgeInsets.all(16.0),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.center,
-//                 children: [
-//                   Text(
-//                     'For Rent Feature Properties',
-//                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-//                   ),
-//                   SizedBox(height: 16),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                     children: [
-//                       PropertyCard(),
-//                       PropertyCard(),
-//                       PropertyCard(),
-//                     ],
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             SizedBox(height: 32),
-//             Padding(
-//               padding: const EdgeInsets.all(16.0),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.center,
-//                 children: [
-//                   Text(
-//                     'One of the customer reviews',
-//                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-//                   ),
-//                   SizedBox(height: 16, width: 300),
-//                   Container(
-//                     padding: EdgeInsets.all(16),
-//                     color: Colors.black,
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Text(
-//                           'What a good website. It\'s very helpful for me.',
-//                           style: TextStyle(color: Colors.white, fontSize: 16),
-//                         ),
-//                         SizedBox(height: 8),
-//                         Align(
-//                           alignment: Alignment.bottomRight,
-//                           child: Text(
-//                             'by Htet Paing',
-//                             style: TextStyle(color: Colors.white, fontSize: 16),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             SizedBox(height: 32),
-//             Row(
-//               children: [
-//                 SizedBox(width: 16),
-//                 Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-//                   child: Text(
-//                     'Experience the serenity and comfort you deserve. Meet us at your perfect retreat today. Our team waiting you.',
-//                     textAlign: TextAlign.center,
-//                     style: TextStyle(color: Colors.grey[600]),
-//                   ),
-//                 ),
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: [
-//                     IconButton(
-//                       icon: Icon(Icons.facebook),
-//                       onPressed: () {},
-//                     ),
-//                     IconButton(
-//                       icon: FaIcon(FontAwesomeIcons.instagram),
-//                       onPressed: () {},
-//                     ),
-//                     IconButton(
-//                       icon: FaIcon(FontAwesomeIcons.twitter),
-//                       onPressed: () {},
-//                     ),
-//                   ],
-//                 ),
-
-//               ],
-//             ),
-//             SizedBox(width: 16),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class PropertyCard extends StatelessWidget {
+  const PropertyCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -513,12 +399,12 @@ class PropertyCard extends StatelessWidget {
             height: 100,
             width: 100,
             color: Colors.grey[400],
-            child: Center(
+            child: const Center(
               child: Text('Photo'),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Text(
               '21 Lakhs\nThis Vista condo for rent\n33/A, Thamardi Road\n(4), Sa/Ka Bls.',
               textAlign: TextAlign.center,
@@ -531,6 +417,7 @@ class PropertyCard extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class CardItem extends StatefulWidget {
   String cardImage;
   String itemPrice;

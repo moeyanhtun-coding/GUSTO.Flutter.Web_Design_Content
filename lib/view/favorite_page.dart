@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_responsive/constants.dart';
-import 'package:flutter_map/flutter_map.dart' as flutterMap;
+
+// ignore: library_prefixes
 import 'package:latlong2/latlong.dart' as latLng;
 
-final List<latLng.LatLng> locations = [
+const List<latLng.LatLng> locations = [
   latLng.LatLng(16.8248, 96.1302), // Yangon, Kamayut Township
   latLng.LatLng(16.7983, 96.1546), // Yangon, Dagon Township
   latLng.LatLng(16.8065, 96.1587), // Yangon, Bahan Township
@@ -107,12 +108,12 @@ class _FavoritePageState extends State<FavoritePage> {
 
   Widget _buildUI() {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(214, 239, 216, 1),
+      backgroundColor: const Color.fromRGBO(214, 239, 216, 1),
       body: Row(
         children: [
           myDrawer,
           Expanded(child: _itemGroup()),
-          CommonMapWidget(
+          const CommonMapWidget(
             widthFactor: 0.3,
             initialCenter: latLng.LatLng(16.84597948042343, 96.16165741985243),
             initialZoom: 13,
@@ -124,7 +125,7 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 
   Widget _itemGroup() {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: Column(
@@ -169,7 +170,7 @@ class _FavoritePageState extends State<FavoritePage> {
       child: GridView.builder(
         itemCount: locations.length,
         gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemBuilder: (context, index) {
           return CardItem(
             cardImage: imgList1[index],
