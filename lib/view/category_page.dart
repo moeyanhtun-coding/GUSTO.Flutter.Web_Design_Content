@@ -6,6 +6,8 @@ import 'package:latlong2/latlong.dart' as latLng;
 String selectedPrice = '650,000 MMK/month';
 String selectedType = 'Penthouse';
 
+late String dropdownValue;
+
 const List<latLng.LatLng> locations = [
   latLng.LatLng(16.8248, 96.1302), // Yangon, Kamayut Township
   latLng.LatLng(16.7983, 96.1546), // Yangon, Dagon Township
@@ -52,10 +54,6 @@ final List<String> imgList1 = [
   'https://images.pexels.com/photos/262405/pexels-photo-262405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 ];
 
-final List<String> imgList2 = [];
-
-final List<String> imgList3 = [];
-
 final List<String> priceList = [
   '300,000 MMK/month',
   '350,000 MMK/month',
@@ -78,6 +76,21 @@ final List<String> priceList = [
   '1,400,000 MMK/month',
   '1,500,000 MMK/month'
 ];
+
+final List<String> priceRangeList = [
+  '300,000 - 600,000 MMK/month',
+  '650,000 - 800,000 MMK/month',
+  '850,000 - 1,000,000 MMK/month',
+  '1,100,000 - 1,500,000 MMK/month',
+];
+final List<String> typeDropList = [
+  'Apartment',
+  'Condominium',
+  'Detached House',
+  'Townhouse',
+  'Studio'
+];
+
 final List<String> typeList = [
   'Apartment',
   'Condominium',
@@ -99,6 +112,17 @@ final List<String> typeList = [
   'Cottage',
   'Villa',
   'Mansion'
+];
+
+const List<String> regions = [
+  "Sagaing Region",
+  "Tanintharyi Region",
+  "Bago Region",
+  "Magway Region",
+  "Mandalay Region",
+  "Yangon Region",
+  "Ayeyarwady Region",
+  "Naypyidaw Union Territory",
 ];
 
 final List<String> locationList = [
@@ -168,6 +192,7 @@ class _CategoryPageState extends State<CategoryPage> {
           _route(),
           _profileSection(),
           _filter(),
+          Margin(width: 0, height: 10),
           Expanded(child: _grideViewItem()),
         ],
       ),
@@ -175,11 +200,57 @@ class _CategoryPageState extends State<CategoryPage> {
   }
 
   Widget _filter() {
-    return const SizedBox(
-      width: double.infinity,
-      height: 100,
-      child: Row(
-        children: [],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(26, 83, 25, 0.1),
+          borderRadius:
+              BorderRadius.circular(10), // Adjust the radius as needed
+        ),
+        height: 50,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            DropdownButtonHideUnderline(
+              child: CommonDropdownButton(
+                items: priceRangeList,
+                initialValue: "300,000 - 600,000 MMK/month",
+                onChanged: (newValue) {
+                  dropdownValue = newValue!;
+                },
+              ),
+            ),
+            DropdownButtonHideUnderline(
+              child: CommonDropdownButton(
+                items: typeDropList,
+                initialValue: "Apartment",
+                onChanged: (newValue) {
+                  dropdownValue = newValue!;
+                },
+              ),
+            ),
+            DropdownButtonHideUnderline(
+              child: CommonDropdownButton(
+                items: regions,
+                initialValue: "Yangon Region",
+                onChanged: (newValue) {
+                  dropdownValue = newValue!;
+                },
+              ),
+            ),
+            DropdownButtonHideUnderline(
+              child: CommonDropdownButton(
+                items: ["Buy", "Rent"],
+                initialValue: "Buy",
+                onChanged: (newValue) {
+                  dropdownValue = newValue!;
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -258,6 +329,53 @@ class _CategoryPageState extends State<CategoryPage> {
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 0, vertical: 20)),
       obscureText: obscureText,
+    );
+  }
+}
+
+class CommonDropdownButton extends StatefulWidget {
+  final List<String> items;
+  final String initialValue;
+  final ValueChanged<String?> onChanged;
+
+  CommonDropdownButton({
+    required this.items,
+    required this.initialValue,
+    required this.onChanged,
+  });
+
+  @override
+  _CommonDropdownButtonState createState() => _CommonDropdownButtonState();
+}
+
+class _CommonDropdownButtonState extends State<CommonDropdownButton> {
+  late String dropdownValue;
+
+  @override
+  void initState() {
+    super.initState();
+    dropdownValue = widget.initialValue;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: DropdownButton<String>(
+        value: dropdownValue,
+        onChanged: (String? newValue) {
+          setState(() {
+            dropdownValue = newValue!;
+          });
+          widget.onChanged(newValue);
+        },
+        items: widget.items.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      ),
     );
   }
 }
