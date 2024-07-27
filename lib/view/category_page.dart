@@ -1,13 +1,12 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_responsive/constants.dart';
-import 'package:flutter_map/flutter_map.dart' as flutterMap;
+// ignore: library_prefixes
 import 'package:latlong2/latlong.dart' as latLng;
 
 String selectedPrice = '650,000 MMK/month';
 String selectedType = 'Penthouse';
 
-final List<latLng.LatLng> locations = [
+const List<latLng.LatLng> locations = [
   latLng.LatLng(16.8248, 96.1302), // Yangon, Kamayut Township
   latLng.LatLng(16.7983, 96.1546), // Yangon, Dagon Township
   latLng.LatLng(16.8065, 96.1587), // Yangon, Bahan Township
@@ -126,7 +125,7 @@ final List<String> locationList = [
 ];
 
 class CategoryPage extends StatefulWidget {
-  CategoryPage({super.key});
+  const CategoryPage({super.key});
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
@@ -136,19 +135,19 @@ class _CategoryPageState extends State<CategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(214, 239, 216, 0.6),
+      backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
       body: _buildUI(),
     );
   }
 
   Widget _buildUI() {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(214, 239, 216, 1),
+      backgroundColor: const Color.fromRGBO(214, 239, 216, 1),
       body: Row(
         children: [
           myDrawer,
           Expanded(child: _itemGroup()),
-          CommonMapWidget(
+          const CommonMapWidget(
             widthFactor: 0.3,
             initialCenter: latLng.LatLng(21.58150733972306, 96.11868142430097),
             initialZoom: 6,
@@ -160,7 +159,7 @@ class _CategoryPageState extends State<CategoryPage> {
   }
 
   Widget _itemGroup() {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: Column(
@@ -176,7 +175,7 @@ class _CategoryPageState extends State<CategoryPage> {
   }
 
   Widget _filter() {
-    return Container(
+    return const SizedBox(
       width: double.infinity,
       height: 100,
       child: Row(
@@ -213,8 +212,8 @@ class _CategoryPageState extends State<CategoryPage> {
         behavior: const ScrollBehavior().copyWith(scrollbars: false),
         child: GridView.builder(
           itemCount: locationList.length,
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
           itemBuilder: (context, index) {
             return CardItem(
               cardImage: imgList1[index],
