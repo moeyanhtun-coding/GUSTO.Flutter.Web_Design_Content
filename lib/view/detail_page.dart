@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_web_responsive/constants.dart';
+import 'package:get/get.dart';
 import 'package:rate_in_stars/rate_in_stars.dart';
 
 // ignore: library_prefixes
@@ -658,13 +659,15 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   Widget _contactAndShowMore() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _contactButton(),
-        _showMore(),
-      ],
+    return SizedBox(
+      height: 150,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _contactButton(),
+          _showMore(),
+        ],
+      ),
     );
   }
 
@@ -689,47 +692,6 @@ class _DetailPageState extends State<DetailPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _contactButton() {
-    return ElevatedButton(
-      style: ButtonStyle(
-        padding: const WidgetStatePropertyAll(EdgeInsets.all(30)),
-        shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(20), // Adjust the radius as needed
-          ),
-        ),
-        backgroundColor: WidgetStateProperty.all(Colors.green),
-        shadowColor: const WidgetStatePropertyAll(Color(0x00000000)),
-        overlayColor: const WidgetStatePropertyAll(
-          Color.fromRGBO(106, 169, 107, 0.573),
-        ),
-      ),
-      onPressed: () {
-        // some method calls
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Icon(
-            Icons.phone,
-            color: Colors.white,
-          ),
-          _margin(8, 0),
-          const Text(
-            "Call Now",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontSize: 15,
-            ),
-          )
         ],
       ),
     );
@@ -905,6 +867,56 @@ class _DetailPageState extends State<DetailPage> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _contactButton() {
+    return SizedBox(
+      width: 200,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          padding: const WidgetStatePropertyAll(EdgeInsets.all(30)),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.circular(20), // Adjust the radius as needed
+            ),
+          ),
+          backgroundColor: WidgetStateProperty.all(Colors.green),
+          shadowColor: WidgetStateProperty.all<Color>(
+              Colors.grey.withOpacity(0.5)), // Shadow color
+          elevation: WidgetStateProperty.all<double>(
+              10), // Elevation to create the shadow effect
+          overlayColor: const WidgetStatePropertyAll(
+            Color.fromRGBO(70, 108, 70, 0.573),
+          ),
+        ),
+        onPressed: () {
+          Get.toNamed("/contactUs");
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.phone,
+              color: Colors.white,
+            ),
+            Margin(
+              width: 8,
+              height: 0,
+            ),
+            const Text(
+              "Call Now",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontSize: 15,
+              ),
+            )
+          ],
         ),
       ),
     );
