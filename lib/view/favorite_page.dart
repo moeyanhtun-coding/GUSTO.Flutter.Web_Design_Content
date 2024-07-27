@@ -136,6 +136,7 @@ class _FavoritePageState extends State<FavoritePage> {
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: _profileSection(),
           ),
+          Margin(width: 0, height: 20),
           Expanded(child: _grideViewItem()),
         ],
       ),
