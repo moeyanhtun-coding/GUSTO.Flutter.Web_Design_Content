@@ -69,6 +69,7 @@ flutter:
     - assets/images/mission.png
     - assets/images/vision.png
     - assets/images/profile.jpg
+    - assets/images/HomeHaven3.jpg
     - assets/svg/
 
   # The following line ensures that the Material Icons font is
