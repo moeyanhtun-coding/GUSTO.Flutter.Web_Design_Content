@@ -46,7 +46,7 @@ class _DetailPageState extends State<DetailPage> {
       backgroundColor: Color.fromRGBO(214, 239, 216, 0.6),
       body: Row(
         children: [
-          myDrawer,
+          CustomDrawer(),
           Expanded(
             child: _containerBox(),
           ),
