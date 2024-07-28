@@ -195,7 +195,7 @@ class _ServicePageState extends State<ServicePage> {
             child: Container(
               width: double.infinity,
               height: 1,
-              color: Color.fromARGB(255, 139, 139, 139),
+              color: const Color.fromARGB(255, 139, 139, 139),
             ),
           ),
           Margin(width: 0, height: 30),
@@ -456,8 +456,7 @@ class _ServicePageState extends State<ServicePage> {
         _homeText("Choose The", 0.03, FontWeight.w900, Colors.grey.shade900),
         Row(
           children: [
-            _homeText("Modern", 0.03, FontWeight.w900, Colors.grey.shade900),
-            Margin(width: 15, height: 0),
+            _homeText("Modern ", 0.03, FontWeight.w900, Colors.grey.shade900),
             _homeText("House", 0.03, FontWeight.w900, Colors.green)
           ],
         ),
@@ -512,19 +511,22 @@ class _ServicePageState extends State<ServicePage> {
         _serviceCardMobile(
           "assets/svg/conversation.svg",
           "Free Consulting",
-          "Get expert advice for all your housing \nneeds with our free consulting service.",
+          "Get expert advice for all your housing",
+          "needs with our free consulting service.",
         ),
         Margin(width: 0, height: 30),
         _serviceCardMobile(
           "assets/svg/contract.svg",
           "Contract Service",
-          "Ensure smooth transactions with our \nprofessional contract services.",
+          "Ensure smooth transactions with our",
+          "professional contract services.",
         ),
         Margin(width: 0, height: 30),
         _serviceCardMobile(
           "assets/svg/transportation.svg",
           "Transportation Service",
-          "Make your move hassle-free with \nour reliable transportation services.",
+          "Make your move hassle-free with",
+          "our reliable transportation services.",
         ),
       ],
     );
@@ -595,7 +597,12 @@ class _ServicePageState extends State<ServicePage> {
     );
   }
 
-  Widget _serviceCardMobile(String svgPath, String text1, String text2) {
+  Widget _serviceCardMobile(
+    String svgPath,
+    String text1,
+    String text2,
+    String text3,
+  ) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -607,7 +614,7 @@ class _ServicePageState extends State<ServicePage> {
         ),
         Margin(width: 0, height: MediaQuery.sizeOf(context).height * 0.03),
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               text1,
@@ -619,6 +626,14 @@ class _ServicePageState extends State<ServicePage> {
             ),
             Text(
               text2,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.025,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+            Text(
+              text3,
               style: TextStyle(
                 fontSize: MediaQuery.sizeOf(context).width * 0.025,
                 fontWeight: FontWeight.bold,
