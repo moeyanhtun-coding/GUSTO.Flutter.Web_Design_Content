@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      title: "H O M E _ H E A V E N",
       getPages: routes,
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
