@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildUI() {
     return Row(
       children: [
-        myDrawer,
+        CustomDrawer(),
         Expanded(child: _container()),
       ],
     );
