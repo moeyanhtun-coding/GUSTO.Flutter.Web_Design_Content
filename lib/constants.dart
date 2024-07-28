@@ -45,7 +45,7 @@ Widget _listGroup() {
                 Get.toNamed("/category");
               }, "/category"),
               _margin(0, 0.005, context),
-              _listItem(4, "C O N T A C T S  U S", Icons.contact_mail, () {
+              _listItem(4, "C O N T A C T  U S", Icons.contact_mail, () {
                 Get.toNamed("/contactUs");
               }, "/contactUs"),
               _margin(0, 0.005, context),
