@@ -26,7 +26,7 @@ class _ContactUsState extends State<ContactUs> {
   Widget _buildUI() {
     return Row(
       children: [
-        myDrawer,
+        CustomDrawer(),
         Expanded(child: _container()),
         Expanded(child: _contactAndMap())
       ],
