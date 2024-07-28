@@ -29,86 +29,139 @@ class _AboutUssState extends State<AboutUss> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
-      body: _buildUI(),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 1200) {
+            return _buildWideLayout();
+          } else if (constraints.maxWidth > 800 &&
+              constraints.maxWidth <= 1200) {
+            return _buildMediumLayout();
+          } else {
+            return _buildMobileLayout();
+          }
+        },
+      ),
     );
   }
 
-  Widget _buildUI() {
-    return Row(
-      children: [
-        CustomDrawer(),
-        Expanded(
-          child: _conatiner(),
-        )
-      ],
-    );
-  }
-
-  Widget _conatiner() {
-    return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: ListView(
+  Widget _buildMobileLayout() {
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+      appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+      ),
+      drawer: CustomDrawer(),
+      body: Column(
         children: [
-          Column(
-            children: [
-              Margin(width: 0, height: 80),
-              _homePageRow1(),
-              Margin(width: 0, height: 40),
-              _aboutRow2(),
-              Margin(width: 0, height: 30),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 100),
-                child: Container(
-                  width: double.infinity,
-                  height: 1,
-                  color: Color.fromARGB(255, 139, 139, 139),
-                ),
-              ),
-              Margin(width: 0, height: 10),
-              _aboutRow5()
-            ],
-          ),
+          Expanded(child: _containerMobile()),
         ],
       ),
     );
   }
 
-  Widget _aboutRow5() {
+  Widget _buildMediumLayout() {
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+      appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+      ),
+      drawer: CustomDrawer(),
+      body: Column(
+        children: [
+          Expanded(child: _containerMedium()),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWideLayout() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(width: 16),
+        CustomDrawer(),
+        Expanded(
+          child: _container(),
+        )
+      ],
+    );
+  }
+
+  Widget _homePageRow1Medium() {
+    return Column(
+      children: [
+        SizedBox(
+          height: MediaQuery.sizeOf(context).width * 0.6,
+          child: _carouselImageMedium(),
+        ),
+      ],
+    );
+  }
+
+  Widget _containerMedium() {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(29.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _homePageRow1Medium(),
+            _textColumnMedium(),
+            Margin(width: 0, height: 50),
+            _serviceRowMedium(),
+            Margin(width: 0, height: MediaQuery.sizeOf(context).width * 0.04),
+            Container(
+              width: double.infinity,
+              height: 1,
+              color: Colors.grey,
+            ),
+            Margin(width: 0, height: MediaQuery.sizeOf(context).width * 0.04),
+            _homeRow5Medium()
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _homeRow5Medium() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 0),
           child: Text(
-            'Experience the serenity and comfort you deserve. Meet us at your perfect retreat today. Our team waiting you.',
+            'Experience the serenity and comfort you deserve.\n Meet us at your perfect retreat today. Our team waiting you.',
             textAlign: TextAlign.center,
-            style:
-                TextStyle(color: Colors.grey[800], fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: Colors.grey[800],
+                fontWeight: FontWeight.bold,
+                fontSize: MediaQuery.sizeOf(context).width * 0.015),
           ),
         ),
+        Margin(width: MediaQuery.sizeOf(context).width * 0.07, height: 0),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.facebook,
                 color: Color.fromARGB(255, 1, 115, 209),
+                size: MediaQuery.sizeOf(context).width * 0.035,
               ),
               onPressed: () {},
             ),
             IconButton(
-              icon: const FaIcon(
+              icon: FaIcon(
                 FontAwesomeIcons.instagram,
                 color: Colors.redAccent,
+                size: MediaQuery.sizeOf(context).width * 0.035,
               ),
               onPressed: () {},
             ),
             IconButton(
-              icon: const FaIcon(
+              icon: FaIcon(
                 FontAwesomeIcons.twitter,
                 color: Colors.blueAccent,
+                size: MediaQuery.sizeOf(context).width * 0.035,
               ),
               onPressed: () {},
             ),
@@ -118,16 +171,405 @@ class _AboutUssState extends State<AboutUss> {
     );
   }
 
+  Widget _serviceRowMedium() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: _serviceCardMedium(
+                "assets/svg/easyfind.svg",
+                "Easy Find",
+                "Quickly locate your ideal home with our",
+                "user-friendly search tools. Effortless navigation",
+                "to match you with the perfect property.",
+              ),
+            ),
+            Expanded(
+              child: _serviceCardMedium(
+                "assets/svg/trusted.svg",
+                "Trusted",
+                "Rely on our proven track record for",
+                "trustworthy and reliable service. Your satisfaction",
+                "and security are our top priorities.",
+              ),
+            ),
+          ],
+        ),
+        Margin(width: 0, height: 30),
+        _serviceCardMedium(
+          "assets/svg/fastest.svg",
+          "Fastest",
+          "Experience the fastest service in the ",
+          "market for all your housing needs. Swift and efficient",
+          "processes to get you settled quickly.",
+        ),
+      ],
+    );
+  }
+
+  Widget _serviceCardMedium(
+    String svgPath,
+    String text1,
+    String text2,
+    String text3,
+    String text4,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SvgPicture.asset(
+          svgPath,
+          width: MediaQuery.sizeOf(context).width * 0.15,
+          height: MediaQuery.sizeOf(context).width * 0.15,
+          allowDrawingOutsideViewBox: true,
+        ),
+        Margin(width: 0, height: MediaQuery.sizeOf(context).height * 0.03),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              text1,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.026,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade900,
+              ),
+            ),
+            Text(
+              text2,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.015,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+            Text(
+              text3,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.015,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+            Text(
+              text4,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.015,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget _textColumnMedium() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            _homeTextMobile(
+                "The Best ", 0.025, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Choice ", 0.025, FontWeight.w900, Colors.green),
+            _homeTextMobile(
+                "For You!", 0.025, FontWeight.w900, Colors.grey.shade900),
+          ],
+        ),
+        Row(
+          children: [
+            _homeTextMobile(
+                "Your ", 0.055, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Trusted,", 0.055, FontWeight.w900, Colors.green)
+          ],
+        ),
+        _homeTextMobile(
+            "Housing Partner", 0.055, FontWeight.w900, Colors.grey.shade900),
+        Row(
+          children: [
+            _homeTextMobile(
+                "Your ", 0.055, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Home, ", 0.055, FontWeight.w900, Colors.green),
+            _homeTextMobile(
+                "Ours ", 0.055, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Misson", 0.055, FontWeight.w900, Colors.green)
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _containerMobile() {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(29.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _homePageRow1Mobile(),
+            _textColumnMobile(),
+            Margin(width: 0, height: 40),
+            _serviceRowMobile(),
+            Margin(width: 0, height: MediaQuery.sizeOf(context).width * 0.04),
+            Container(
+              width: double.infinity,
+              height: 1,
+              color: Colors.grey,
+            ),
+            Margin(width: 0, height: MediaQuery.sizeOf(context).width * 0.04),
+            _homeRow5Mobile(),
+            Margin(width: 0, height: MediaQuery.sizeOf(context).width * 0.04),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.facebook,
+                    color: Color.fromARGB(255, 1, 115, 209),
+                    size: MediaQuery.sizeOf(context).width * 0.05,
+                  ),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: FaIcon(
+                    FontAwesomeIcons.instagram,
+                    color: Colors.redAccent,
+                    size: MediaQuery.sizeOf(context).width * 0.05,
+                  ),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: FaIcon(
+                    FontAwesomeIcons.twitter,
+                    color: Colors.blueAccent,
+                    size: MediaQuery.sizeOf(context).width * 0.05,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _carouselImageMedium() {
+    return Column(
+      children: [
+        CarouselSlider(
+          items: imgList
+              .map(
+                (e) => Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      e,
+                      height: MediaQuery.sizeOf(context).height * 0.6,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+          options: CarouselOptions(
+            initialPage: 0,
+            autoPlay: true,
+            autoPlayInterval: const Duration(milliseconds: 2000),
+            enlargeCenterPage: true,
+            enlargeFactor: 0.3,
+            onPageChanged: (value, _) {
+              setState(() {});
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _container() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Margin(width: 0, height: 30),
+          _homePageRow1(),
+          Margin(width: 0, height: 30),
+          _serviceRow2(),
+          Margin(width: 0, height: 50),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 100),
+            child: Container(
+              width: double.infinity,
+              height: 1,
+              color: Color.fromARGB(255, 139, 139, 139),
+            ),
+          ),
+          Margin(width: 0, height: 10),
+          _homeRow5()
+        ],
+      ),
+    );
+  }
+
   Widget _homePageRow1() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Margin(width: 100, height: 0),
-          Expanded(child: _aboutTextColumn()),
+          Margin(width: 80, height: 0),
+          Expanded(child: _textColumn()),
           Expanded(child: _carouselImage()),
-          Margin(width: 130, height: 0),
+          Margin(width: 80, height: 0),
         ],
+      ),
+    );
+  }
+
+  Widget _textColumn() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            _homeText("The Best ", 0.01, FontWeight.w900, Colors.grey.shade900),
+            _homeText("Choice ", 0.01, FontWeight.w900, Colors.green),
+            _homeText("For You!", 0.01, FontWeight.w900, Colors.grey.shade900),
+          ],
+        ),
+        Row(
+          children: [
+            _homeText("Your ", 0.03, FontWeight.w900, Colors.grey.shade900),
+            _homeText("Trusted", 0.03, FontWeight.w900, Colors.green)
+          ],
+        ),
+        _homeText(
+            "Housing Partner", 0.03, FontWeight.w900, Colors.grey.shade900),
+        Row(
+          children: [
+            _homeText("Your ", 0.02, FontWeight.w900, Colors.grey.shade900),
+            _homeText("Home, ", 0.02, FontWeight.w900, Colors.green),
+            _homeText("Our ", 0.02, FontWeight.w900, Colors.grey.shade900),
+            _homeText("Mission", 0.02, FontWeight.w900, Colors.green)
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _serviceRow2() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Expanded(
+          child: _serviceCard(
+            "assets/svg/easyfind.svg",
+            "Easy Find",
+            "Quickly locate your ideal home with our",
+            "user-friendly search tools. Effortless navigation",
+            "to match you with the perfect property.",
+          ),
+        ),
+        Expanded(
+          child: Column(
+            children: [
+              Margin(width: 0, height: 70),
+              _serviceCard(
+                "assets/svg/trusted.svg",
+                "Trusted",
+                "Rely on our proven track record for",
+                "trustworthy and reliable service. Your satisfaction",
+                "and security are our top priorities.",
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: _serviceCard(
+            "assets/svg/fastest.svg",
+            "Fastest",
+            "Experience the fastest service in the ",
+            "market for all your housing needs. Swift and efficient",
+            "processes to get you settled quickly.",
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _serviceCard(
+    String svgPath,
+    String text1,
+    String text2,
+    String text3,
+    String text4,
+  ) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SvgPicture.asset(
+          svgPath,
+          height: MediaQuery.sizeOf(context).width * 0.07,
+          width: MediaQuery.sizeOf(context).width * 0.07,
+          allowDrawingOutsideViewBox: true,
+        ),
+        Margin(width: 0, height: 20),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              text1,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.016,
+                fontWeight: FontWeight.bold,
+                color: const Color.fromARGB(255, 57, 135, 60),
+              ),
+            ),
+            Text(
+              text2,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.0077,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+            Text(
+              text3,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.0077,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+            Text(
+              text4,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.0077,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget _homeText(String text, double size, FontWeight weight, Color color) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: MediaQuery.sizeOf(context).width * size,
+        fontWeight: weight,
+        color: color,
+        decoration: TextDecoration.none,
       ),
     );
   }
@@ -156,7 +598,7 @@ class _AboutUssState extends State<AboutUss> {
               autoPlay: true,
               autoPlayInterval: const Duration(milliseconds: 2000),
               enlargeCenterPage: true,
-              enlargeFactor: 0.5,
+              enlargeFactor: 0.33,
               onPageChanged: (value, _) {
                 setState(() {});
               }),
@@ -165,127 +607,208 @@ class _AboutUssState extends State<AboutUss> {
     );
   }
 
-  Widget _aboutTextColumn() {
+  Widget _homeRow5Mobile() {
+    return Text(
+      'Experience the serenity and comfort you deserve.\n Meet us at your perfect retreat today. Our team waiting you.',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          color: Colors.grey[800],
+          fontWeight: FontWeight.bold,
+          fontSize: MediaQuery.sizeOf(context).width * 0.022),
+    );
+  }
+
+  Widget _homePageRow1Mobile() {
+    return Column(
+      children: [
+        SizedBox(
+          height: MediaQuery.sizeOf(context).width * 0.6,
+          child: _carouselImage(),
+        ),
+      ],
+    );
+  }
+
+  Widget _textColumnMobile() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _aboutText("The Best ", Colors.grey.shade900, 20, FontWeight.w900),
-            _aboutText("Choice ", Colors.green, 20, FontWeight.w900),
-            _aboutText("For You!", Colors.grey.shade900, 20, FontWeight.w900),
+            _homeTextMobile(
+                "The Best ", 0.025, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Choice ", 0.025, FontWeight.w900, Colors.green),
+            _homeTextMobile(
+                "For You!", 0.025, FontWeight.w900, Colors.grey.shade900),
           ],
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _aboutText("Your ", Colors.grey.shade900, 70, FontWeight.bold),
-            _aboutText("Trusted, ", Colors.green, 70, FontWeight.bold),
+            _homeTextMobile(
+                "Your ", 0.06, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Trusted,", 0.06, FontWeight.w900, Colors.green)
           ],
         ),
-        _aboutText(
-            "Housing Partner", Colors.grey.shade900, 70, FontWeight.bold),
+        _homeTextMobile(
+            "Housing Partner", 0.06, FontWeight.w900, Colors.grey.shade900),
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _aboutText("Your ", Colors.grey.shade900, 30, FontWeight.bold),
-            _aboutText("Home, ", Colors.green, 30, FontWeight.bold),
-            _aboutText("Our ", Colors.grey.shade900, 30, FontWeight.bold),
-            _aboutText("Mission ", Colors.green, 30, FontWeight.bold),
+            _homeTextMobile(
+                "Your ", 0.06, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Home, ", 0.06, FontWeight.w900, Colors.green),
+            _homeTextMobile(
+                "Ours ", 0.06, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Misson", 0.06, FontWeight.w900, Colors.green)
           ],
         ),
       ],
     );
   }
 
-  Widget _aboutRow2() {
-    return Row(
-      children: [
-        Expanded(
-          child: _aboutCard(
-            "assets/svg/easyfind.svg",
-            0,
-            0,
-            "Easy Find",
-            "Quickly locate your ideal home with our",
-            "user-friendly search tools. Effortless navigation",
-            "to match you with the perfect property.",
-            100,
-            100,
-          ),
-        ),
-        Expanded(
-          child: _aboutCard(
-            "assets/svg/trusted.svg",
-            0,
-            60,
-            "Trusted",
-            "Rely on our proven track record for",
-            "trustworthy and reliable service. Your satisfaction",
-            "and security are our top priorities.",
-            100,
-            130,
-          ),
-        ),
-        Expanded(
-          child: _aboutCard(
-            "assets/svg/fastest.svg",
-            0,
-            0,
-            "Fastest",
-            "Experience the fastest service in the ",
-            "market for all your housing needs. Swift and efficient",
-            "processes to get you settled quickly.",
-            100,
-            130,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _aboutCard(
+  Widget _serviceCardMobile(
     String svgPath,
-    double width,
-    double height,
-    String text,
-    String descriptionText,
-    String descriptionText2,
-    String descriptionText3,
-    double svgWidth,
-    double svgHeight,
+    String text1,
+    String text2,
+    String text3,
+    String text4,
   ) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Margin(width: width, height: height),
         SvgPicture.asset(
-          height: svgHeight,
-          width: svgWidth,
           svgPath,
+          height: MediaQuery.sizeOf(context).width * 0.2,
+          width: 60.0,
           allowDrawingOutsideViewBox: true,
         ),
-        Margin(width: 0, height: 10),
-        _aboutText(
-            text, const Color.fromARGB(255, 57, 135, 60), 30, FontWeight.bold),
-        Margin(width: 0, height: 10),
-        _aboutText(descriptionText, Colors.grey.shade900, 15, FontWeight.bold),
-        _aboutText(descriptionText2, Colors.grey.shade900, 15, FontWeight.bold),
-        _aboutText(descriptionText3, Colors.grey.shade900, 15, FontWeight.bold),
+        Margin(width: 0, height: MediaQuery.sizeOf(context).height * 0.03),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              text1,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.04,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade900,
+              ),
+            ),
+            Text(
+              text2,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.025,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+            Text(
+              text3,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.025,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+            Text(
+              text4,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.025,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+          ],
+        )
       ],
     );
   }
 
-  Widget _aboutText(String text, Color color, double size, FontWeight weight) {
+  Widget _serviceRowMobile() {
+    return Column(
+      children: [
+        _serviceCardMobile(
+          "assets/svg/easyfind.svg",
+          "Easy Find",
+          "Quickly locate your ideal home with our",
+          "user-friendly search tools. Effortless navigation",
+          "to match you with the perfect property.",
+        ),
+        Margin(width: 0, height: 30),
+        _serviceCardMobile(
+          "assets/svg/trusted.svg",
+          "Trusted",
+          "Rely on our proven track record for",
+          "trustworthy and reliable service. Your satisfaction",
+          "and security are our top priorities.",
+        ),
+        Margin(width: 0, height: 30),
+        _serviceCardMobile(
+          "assets/svg/fastest.svg",
+          "Fastest",
+          "Experience the fastest service in the ",
+          "market for all your housing needs. Swift and efficient",
+          "processes to get you settled quickly.",
+        ),
+      ],
+    );
+  }
+
+  Widget _homeTextMobile(
+      String text, double size, FontWeight weight, Color color) {
     return Text(
       text,
       style: TextStyle(
-        decoration: TextDecoration.none,
-        color: color,
-        fontSize: size,
+        fontSize: MediaQuery.sizeOf(context).width * size,
         fontWeight: weight,
+        color: color,
+        decoration: TextDecoration.none,
       ),
+    );
+  }
+
+  Widget _homeRow5() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            'Experience the serenity and comfort you deserve. Meet us at your perfect retreat today. Our team waiting you.',
+            textAlign: TextAlign.center,
+            style:
+                TextStyle(color: Colors.grey[800], fontWeight: FontWeight.bold),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(
+                Icons.facebook,
+                color: const Color.fromARGB(255, 1, 115, 209),
+                size: MediaQuery.sizeOf(context).width * 0.02,
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.instagram,
+                color: Colors.redAccent,
+                size: MediaQuery.sizeOf(context).width * 0.02,
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.twitter,
+                color: Colors.blueAccent,
+                size: MediaQuery.sizeOf(context).width * 0.02,
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
