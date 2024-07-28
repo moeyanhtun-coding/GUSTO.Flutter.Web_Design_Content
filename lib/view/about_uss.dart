@@ -36,7 +36,7 @@ class _AboutUssState extends State<AboutUss> {
   Widget _buildUI() {
     return Row(
       children: [
-        myDrawer,
+        CustomDrawer(),
         Expanded(
           child: _conatiner(),
         )
