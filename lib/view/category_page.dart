@@ -205,7 +205,7 @@ class _CategoryPageState extends State<CategoryPage> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Color.fromRGBO(26, 83, 25, 0.1),
+          color: Color.fromRGBO(255, 255, 255, 1),
           borderRadius:
               BorderRadius.circular(10), // Adjust the radius as needed
         ),
