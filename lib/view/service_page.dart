@@ -28,62 +28,187 @@ class _ServicePageState extends State<ServicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
-        body: _buildUI());
+      backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 1200) {
+            return _buildWideLayout();
+          } else if (constraints.maxWidth > 800 &&
+              constraints.maxWidth <= 1200) {
+            return _buildMediumLayout();
+          } else {
+            return _buildMobileLayout();
+          }
+        },
+      ),
+    );
   }
 
-  Widget _buildUI() {
+  Widget _buildWideLayout() {
     return Row(
       children: [
-        myDrawer,
+        CustomDrawer(),
         Expanded(child: _container()),
       ],
     );
   }
 
-  Widget _container() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Margin(width: 0, height: 90),
-        _homePageRow1(),
-        Margin(width: 0, height: 70),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+  Widget _buildMediumLayout() {
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+      appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+      ),
+      drawer: CustomDrawer(),
+      body: Column(
+        children: [
+          Expanded(child: _containerMedium()),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMobileLayout() {
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+      appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+      ),
+      drawer: CustomDrawer(),
+      body: Column(
+        children: [
+          Expanded(child: _containerMobile()),
+        ],
+      ),
+    );
+  }
+
+  Widget _containerMedium() {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(29.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _homeText("Best", 25, FontWeight.normal, Colors.grey.shade900),
-            Margin(width: 10, height: 0),
-            _homeText("Services", 25, FontWeight.w900, Colors.green),
-            Margin(width: 10, height: 0),
-            _homeText("On", 25, FontWeight.w900, Colors.grey.shade900),
-            Margin(width: 10, height: 0),
-            _homeText(
-                "House Heaven", 25, FontWeight.w900, Colors.grey.shade900),
+            _homePageRow1Medium(),
+            _textColumnMedium(),
+            Margin(width: 0, height: 50),
+            _serviceRowMedium(),
+            Margin(width: 0, height: MediaQuery.sizeOf(context).width * 0.04),
+            Container(
+              width: double.infinity,
+              height: 1,
+              color: Colors.grey,
+            ),
+            Margin(width: 0, height: MediaQuery.sizeOf(context).width * 0.04),
+            _homeRow5Medium()
           ],
         ),
-        Margin(width: 0, height: 70),
-        _serviceRow2(),
-        Margin(width: 0, height: 50),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 100),
-          child: Container(
-            width: double.infinity,
-            height: 1,
-            color: Color.fromARGB(255, 139, 139, 139),
-          ),
+      ),
+    );
+  }
+
+  Widget _containerMobile() {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(29.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _homePageRow1Mobile(),
+            _textColumnMobile(),
+            Margin(width: 0, height: 20),
+            _serviceRowMobile(),
+            Margin(width: 0, height: MediaQuery.sizeOf(context).width * 0.04),
+            Container(
+              width: double.infinity,
+              height: 1,
+              color: Colors.grey,
+            ),
+            Margin(width: 0, height: MediaQuery.sizeOf(context).width * 0.04),
+            _homeRow5Mobile(),
+            Margin(width: 0, height: MediaQuery.sizeOf(context).width * 0.04),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.facebook,
+                    color: Color.fromARGB(255, 1, 115, 209),
+                    size: MediaQuery.sizeOf(context).width * 0.05,
+                  ),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: FaIcon(
+                    FontAwesomeIcons.instagram,
+                    color: Colors.redAccent,
+                    size: MediaQuery.sizeOf(context).width * 0.05,
+                  ),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: FaIcon(
+                    FontAwesomeIcons.twitter,
+                    color: Colors.blueAccent,
+                    size: MediaQuery.sizeOf(context).width * 0.05,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ],
         ),
-        Margin(width: 0, height: 30),
-        _homeRow5()
-      ],
+      ),
+    );
+  }
+
+  Widget _container() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Margin(width: 0, height: 90),
+          _homePageRow1(),
+          Margin(width: 0, height: 70),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _homeText("Best", 0.015, FontWeight.normal, Colors.grey.shade900),
+              Margin(width: 10, height: 0),
+              _homeText("Services", 0.015, FontWeight.w900, Colors.green),
+              Margin(width: 10, height: 0),
+              _homeText("On", 0.015, FontWeight.w900, Colors.grey.shade900),
+              Margin(width: 10, height: 0),
+              _homeText(
+                  "House Heaven", 0.015, FontWeight.w900, Colors.grey.shade900),
+            ],
+          ),
+          Margin(width: 0, height: 70),
+          _serviceRow2(),
+          Margin(width: 0, height: 50),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 100),
+            child: Container(
+              width: double.infinity,
+              height: 1,
+              color: Color.fromARGB(255, 139, 139, 139),
+            ),
+          ),
+          Margin(width: 0, height: 30),
+          _homeRow5()
+        ],
+      ),
     );
   }
 
   Widget _homeRow5() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const SizedBox(width: 16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
@@ -97,27 +222,112 @@ class _ServicePageState extends State<ServicePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.facebook,
                 color: Color.fromARGB(255, 1, 115, 209),
+                size: MediaQuery.sizeOf(context).width * 0.02,
               ),
               onPressed: () {},
             ),
             IconButton(
-              icon: const FaIcon(
+              icon: FaIcon(
                 FontAwesomeIcons.instagram,
                 color: Colors.redAccent,
+                size: MediaQuery.sizeOf(context).width * 0.02,
               ),
               onPressed: () {},
             ),
             IconButton(
-              icon: const FaIcon(
+              icon: FaIcon(
                 FontAwesomeIcons.twitter,
                 color: Colors.blueAccent,
+                size: MediaQuery.sizeOf(context).width * 0.02,
               ),
               onPressed: () {},
             ),
           ],
+        ),
+      ],
+    );
+  }
+
+  Widget _homeRow5Medium() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0),
+          child: Text(
+            'Experience the serenity and comfort you deserve.\n Meet us at your perfect retreat today. Our team waiting you.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.grey[800],
+                fontWeight: FontWeight.bold,
+                fontSize: MediaQuery.sizeOf(context).width * 0.015),
+          ),
+        ),
+        Margin(width: MediaQuery.sizeOf(context).width * 0.07, height: 0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(
+                Icons.facebook,
+                color: Color.fromARGB(255, 1, 115, 209),
+                size: MediaQuery.sizeOf(context).width * 0.035,
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.instagram,
+                color: Colors.redAccent,
+                size: MediaQuery.sizeOf(context).width * 0.035,
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.twitter,
+                color: Colors.blueAccent,
+                size: MediaQuery.sizeOf(context).width * 0.035,
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _homeRow5Mobile() {
+    return Text(
+      'Experience the serenity and comfort you deserve.\n Meet us at your perfect retreat today. Our team waiting you.',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          color: Colors.grey[800],
+          fontWeight: FontWeight.bold,
+          fontSize: MediaQuery.sizeOf(context).width * 0.022),
+    );
+  }
+
+  Widget _homePageRow1Mobile() {
+    return Column(
+      children: [
+        SizedBox(
+          height: MediaQuery.sizeOf(context).width * 0.6,
+          child: _carouselImage(),
+        ),
+      ],
+    );
+  }
+
+  Widget _homePageRow1Medium() {
+    return Column(
+      children: [
+        SizedBox(
+          height: MediaQuery.sizeOf(context).width * 0.6,
+          child: _carouselImageMedium(),
         ),
       ],
     );
@@ -137,30 +347,125 @@ class _ServicePageState extends State<ServicePage> {
     );
   }
 
+  Widget _homeTextMobile(
+      String text, double size, FontWeight weight, Color color) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: MediaQuery.sizeOf(context).width * size,
+        fontWeight: weight,
+        color: color,
+        decoration: TextDecoration.none,
+      ),
+    );
+  }
+
+  Widget _textColumnMedium() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            _homeTextMobile(
+                "The Best ", 0.025, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Choice ", 0.025, FontWeight.w900, Colors.green),
+            _homeTextMobile(
+                "For You!", 0.025, FontWeight.w900, Colors.grey.shade900),
+          ],
+        ),
+        Row(
+          children: [
+            _homeTextMobile("Choose The Modern ", 0.06, FontWeight.w900,
+                Colors.grey.shade900),
+            _homeTextMobile("House", 0.06, FontWeight.w900, Colors.green)
+          ],
+        ),
+        Row(
+          children: [
+            _homeTextMobile(
+                "For ", 0.06, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Better ", 0.06, FontWeight.w900, Colors.green),
+            _homeTextMobile(
+                "Living ", 0.06, FontWeight.w900, Colors.grey.shade900),
+          ],
+        ),
+        _homeTextMobile(
+          "Modern House With Of-The_Moment Design Sense at an affordable Price",
+          0.02,
+          FontWeight.w900,
+          Colors.grey.shade600,
+        ),
+        Margin(width: 0, height: 20),
+        _contactButtonMedium(),
+      ],
+    );
+  }
+
+  Widget _textColumnMobile() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            _homeTextMobile(
+                "The Best ", 0.025, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Choice ", 0.025, FontWeight.w900, Colors.green),
+            _homeTextMobile(
+                "For You!", 0.025, FontWeight.w900, Colors.grey.shade900),
+          ],
+        ),
+        Row(
+          children: [
+            _homeTextMobile("Choose The Modern ", 0.06, FontWeight.w900,
+                Colors.grey.shade900),
+            _homeTextMobile("House", 0.06, FontWeight.w900, Colors.green)
+          ],
+        ),
+        Row(
+          children: [
+            _homeTextMobile(
+                "For ", 0.06, FontWeight.w900, Colors.grey.shade900),
+            _homeTextMobile("Better ", 0.06, FontWeight.w900, Colors.green),
+            _homeTextMobile(
+                "Living ", 0.06, FontWeight.w900, Colors.grey.shade900),
+          ],
+        ),
+        _homeTextMobile(
+          "Modern House With Of-The_Moment Design Sense at an affordable Price",
+          0.02,
+          FontWeight.w900,
+          Colors.grey.shade600,
+        ),
+        Margin(width: 0, height: 20),
+        _contactButtonMobile(),
+      ],
+    );
+  }
+
   Widget _textColumn() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            _homeText("The Best ", 20, FontWeight.w900, Colors.grey.shade900),
-            _homeText("Choice ", 20, FontWeight.w900, Colors.green),
-            _homeText("For You!", 20, FontWeight.w900, Colors.grey.shade900),
+            _homeText("The Best ", 0.01, FontWeight.w900, Colors.grey.shade900),
+            _homeText("Choice ", 0.01, FontWeight.w900, Colors.green),
+            _homeText("For You!", 0.01, FontWeight.w900, Colors.grey.shade900),
           ],
         ),
-        _homeText("Choose The", 70, FontWeight.w900, Colors.grey.shade900),
+        _homeText("Choose The", 0.03, FontWeight.w900, Colors.grey.shade900),
         Row(
           children: [
-            _homeText("Modern", 70, FontWeight.w900, Colors.grey.shade900),
+            _homeText("Modern", 0.03, FontWeight.w900, Colors.grey.shade900),
             Margin(width: 15, height: 0),
-            _homeText("House", 70, FontWeight.w900, Colors.green)
+            _homeText("House", 0.03, FontWeight.w900, Colors.green)
           ],
         ),
         _homeText(
-            "For Better Living", 70, FontWeight.w900, Colors.grey.shade900),
+            "For Better Living", 0.03, FontWeight.w900, Colors.grey.shade900),
         _homeText(
           "Modern House With Of-The_Moment Design Sense at an affordable Price",
-          13,
+          0.0079,
           FontWeight.w900,
           Colors.grey.shade600,
         ),
@@ -170,10 +475,65 @@ class _ServicePageState extends State<ServicePage> {
     );
   }
 
+  Widget _serviceRowMedium() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: _serviceCardMedium(
+                "assets/svg/conversation.svg",
+                "Free Consulting",
+                "Get expert advice for all your housing \nneeds with our free consulting service.",
+              ),
+            ),
+            Expanded(
+              child: _serviceCardMedium(
+                "assets/svg/contract.svg",
+                "Contract Service",
+                "Ensure smooth transactions with our \nprofessional contract services.",
+              ),
+            ),
+          ],
+        ),
+        Margin(width: 0, height: 30),
+        _serviceCardMedium(
+          "assets/svg/transportation.svg",
+          "Transportation Service",
+          "Make your move hassle-free with \nour reliable transportation services.",
+        ),
+      ],
+    );
+  }
+
+  Widget _serviceRowMobile() {
+    return Column(
+      children: [
+        _serviceCardMobile(
+          "assets/svg/conversation.svg",
+          "Free Consulting",
+          "Get expert advice for all your housing \nneeds with our free consulting service.",
+        ),
+        Margin(width: 0, height: 30),
+        _serviceCardMobile(
+          "assets/svg/contract.svg",
+          "Contract Service",
+          "Ensure smooth transactions with our \nprofessional contract services.",
+        ),
+        Margin(width: 0, height: 30),
+        _serviceCardMobile(
+          "assets/svg/transportation.svg",
+          "Transportation Service",
+          "Make your move hassle-free with \nour reliable transportation services.",
+        ),
+      ],
+    );
+  }
+
   Widget _serviceRow2() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Margin(width: 90, height: 0),
         Expanded(
           child: _serviceCard(
             "assets/svg/conversation.svg",
@@ -195,7 +555,78 @@ class _ServicePageState extends State<ServicePage> {
             "Make your move hassle-free with \nour reliable transportation services.",
           ),
         ),
-        Margin(width: 90, height: 0),
+      ],
+    );
+  }
+
+  Widget _serviceCardMedium(String svgPath, String text1, String text2) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SvgPicture.asset(
+          svgPath,
+          width: MediaQuery.sizeOf(context).width * 0.15,
+          height: MediaQuery.sizeOf(context).width * 0.15,
+          allowDrawingOutsideViewBox: true,
+        ),
+        Margin(width: 0, height: MediaQuery.sizeOf(context).height * 0.03),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              text1,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.026,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade900,
+              ),
+            ),
+            Text(
+              text2,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.015,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget _serviceCardMobile(String svgPath, String text1, String text2) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SvgPicture.asset(
+          svgPath,
+          height: MediaQuery.sizeOf(context).width * 0.2,
+          width: 60.0,
+          allowDrawingOutsideViewBox: true,
+        ),
+        Margin(width: 0, height: MediaQuery.sizeOf(context).height * 0.03),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              text1,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.04,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade900,
+              ),
+            ),
+            Text(
+              text2,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width * 0.025,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+          ],
+        )
       ],
     );
   }
@@ -206,8 +637,8 @@ class _ServicePageState extends State<ServicePage> {
       children: [
         SvgPicture.asset(
           svgPath,
-          height: 60.0,
-          width: 60.0,
+          height: MediaQuery.sizeOf(context).width * 0.04,
+          width: MediaQuery.sizeOf(context).width * 0.04,
           allowDrawingOutsideViewBox: true,
         ),
         Margin(width: 20, height: 0),
@@ -217,7 +648,7 @@ class _ServicePageState extends State<ServicePage> {
             Text(
               text1,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: MediaQuery.sizeOf(context).width * 0.0119,
                 fontWeight: FontWeight.w900,
                 color: Colors.grey.shade900,
               ),
@@ -225,7 +656,7 @@ class _ServicePageState extends State<ServicePage> {
             Text(
               text2,
               style: TextStyle(
-                fontSize: 15,
+                fontSize: MediaQuery.sizeOf(context).width * 0.007,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey.shade700,
               ),
@@ -240,11 +671,45 @@ class _ServicePageState extends State<ServicePage> {
     return Text(
       text,
       style: TextStyle(
-        fontSize: size,
+        fontSize: MediaQuery.sizeOf(context).width * size,
         fontWeight: weight,
         color: color,
         decoration: TextDecoration.none,
       ),
+    );
+  }
+
+  Widget _carouselImageMedium() {
+    return Column(
+      children: [
+        CarouselSlider(
+          items: imgList
+              .map(
+                (e) => Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      e,
+                      height: MediaQuery.sizeOf(context).height * 0.6,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+          options: CarouselOptions(
+            initialPage: 0,
+            autoPlay: true,
+            autoPlayInterval: const Duration(milliseconds: 2000),
+            enlargeCenterPage: true,
+            enlargeFactor: 0.3,
+            onPageChanged: (value, _) {
+              setState(() {});
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -272,7 +737,7 @@ class _ServicePageState extends State<ServicePage> {
             autoPlay: true,
             autoPlayInterval: const Duration(milliseconds: 2000),
             enlargeCenterPage: true,
-            enlargeFactor: 0.5,
+            enlargeFactor: 0.3,
             onPageChanged: (value, _) {
               setState(() {});
             },
@@ -282,9 +747,110 @@ class _ServicePageState extends State<ServicePage> {
     );
   }
 
+  Widget _contactButtonMedium() {
+    double size = MediaQuery.sizeOf(context).width * 0.03;
+    return SizedBox(
+      width: 250,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          padding: WidgetStatePropertyAll(EdgeInsets.all(size)),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.circular(20), // Adjust the radius as needed
+            ),
+          ),
+          backgroundColor: WidgetStateProperty.all(Colors.green),
+          shadowColor: WidgetStateProperty.all<Color>(
+              Colors.grey.withOpacity(0.5)), // Shadow color
+          elevation: WidgetStateProperty.all<double>(
+              10), // Elevation to create the shadow effect
+          overlayColor: const WidgetStatePropertyAll(
+            Color.fromRGBO(70, 108, 70, 0.573),
+          ),
+        ),
+        onPressed: () {
+          Get.toNamed("/contactUs");
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.phone,
+              color: Colors.white,
+              size: MediaQuery.sizeOf(context).width * 0.03,
+            ),
+            Margin(
+              width: 8,
+              height: 0,
+            ),
+            Text(
+              "Call Now",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontSize: MediaQuery.sizeOf(context).width * 0.02,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _contactButtonMobile() {
+    double size = MediaQuery.sizeOf(context).width * 0.04;
+    return ElevatedButton(
+      style: ButtonStyle(
+        padding: WidgetStatePropertyAll(EdgeInsets.all(size)),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.circular(20), // Adjust the radius as needed
+          ),
+        ),
+        backgroundColor: WidgetStateProperty.all(Colors.green),
+        shadowColor: WidgetStateProperty.all<Color>(
+            Colors.grey.withOpacity(0.5)), // Shadow color
+        elevation: WidgetStateProperty.all<double>(
+            10), // Elevation to create the shadow effect
+        overlayColor: const WidgetStatePropertyAll(
+          Color.fromRGBO(70, 108, 70, 0.573),
+        ),
+      ),
+      onPressed: () {
+        Get.toNamed("/contactUs");
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.phone,
+            color: Colors.white,
+            size: MediaQuery.sizeOf(context).width * 0.04,
+          ),
+          Margin(
+            width: 8,
+            height: 0,
+          ),
+          Text(
+            "Call Now",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: MediaQuery.sizeOf(context).width * 0.03,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _contactButton() {
     return SizedBox(
-      width: 200,
+      width: MediaQuery.sizeOf(context).height * 0.4,
       child: ElevatedButton(
         style: ButtonStyle(
           padding: const WidgetStatePropertyAll(EdgeInsets.all(30)),
