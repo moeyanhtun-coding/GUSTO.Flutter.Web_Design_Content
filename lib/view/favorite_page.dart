@@ -111,7 +111,7 @@ class _FavoritePageState extends State<FavoritePage> {
       backgroundColor: const Color.fromRGBO(214, 239, 216, 1),
       body: Row(
         children: [
-          myDrawer,
+          CustomDrawer(),
           Expanded(child: _itemGroup()),
           const CommonMapWidget(
             widthFactor: 0.3,
