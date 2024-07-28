@@ -11,16 +11,37 @@ var myAppBar = AppBar(
   iconTheme: const IconThemeData(color: Colors.white),
 );
 
-var myDrawer = Drawer(
-  child: Column(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      _drawerHeader(),
-      _listGroup(),
-      _logoutd(),
-    ],
-  ),
-);
+class CustomDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _drawerHeader(context),
+          _listGroup(),
+          _logout(),
+        ],
+      ),
+    );
+  }
+
+  Widget _logout() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+      child: _listItem(
+        5,
+        "L O G O U T",
+        Icons.logout,
+        () {
+          Get.offAllNamed("/login");
+        },
+        "/login",
+      ),
+    );
+  }
+}
+
 Widget _listGroup() {
   return Builder(
     builder: (context) {
@@ -60,14 +81,14 @@ Widget _listGroup() {
   );
 }
 
-Widget _drawerHeader() {
+Widget _drawerHeader(BuildContext context) {
   return DrawerHeader(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset(
           'assets/svg/logo.svg',
-          width: 80.0,
+          width: 80,
           allowDrawingOutsideViewBox: true,
         ),
         SizedBox(
@@ -208,21 +229,6 @@ Widget _listItem(
     title: title,
     tap: tap,
     route: route,
-  );
-}
-
-Widget _logoutd() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-    child: _listItem(
-      5,
-      "L O G O U T",
-      Icons.logout,
-      () {
-        Get.offAllNamed("/login");
-      },
-      "/login",
-    ),
   );
 }
 
