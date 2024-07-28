@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                               style: TextStyle(
                                 fontSize: 100,
                                 fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(26, 83, 25, 1),
+                                color: Color.fromRGBO(44, 148, 43, 1),
                               ),
                             ),
                             Text(
