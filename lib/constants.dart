@@ -94,7 +94,7 @@ Widget _drawerHeader(BuildContext context) {
         SizedBox(
           width: 20,
         ),
-        Text("H O M E  H E A V E N"),
+        Text("H O M E  H A V E N"),
       ],
     ),
   );
