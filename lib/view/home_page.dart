@@ -97,11 +97,41 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
-        body: _buildUI());
+      backgroundColor: const Color.fromRGBO(214, 239, 216, 0.6),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 1200) {
+            return _buildWideLayout();
+          } else if (constraints.maxWidth > 800 &&
+              constraints.maxWidth <= 1200) {
+            return _buildMediumLayout();
+          } else {
+            return _buildMobileLayout();
+          }
+        },
+      ),
+    );
   }
 
-  Widget _buildUI() {
+  Widget _buildWideLayout() {
+    return Row(
+      children: [
+        CustomDrawer(),
+        Expanded(child: _container()),
+      ],
+    );
+  }
+
+  Widget _buildMediumLayout() {
+    return Row(
+      children: [
+        CustomDrawer(),
+        Expanded(child: _container()),
+      ],
+    );
+  }
+
+  Widget _buildMobileLayout() {
     return Row(
       children: [
         CustomDrawer(),
@@ -316,7 +346,7 @@ class _HomePageState extends State<HomePage> {
               _homeText("One of the customers", 20, FontWeight.bold,
                   Colors.grey.shade900),
               Margin(width: 10, height: 0),
-              _homeText("Service", 20, FontWeight.w900, Colors.green)
+              _homeText("Review", 20, FontWeight.w900, Colors.green)
             ],
           ),
           const SizedBox(height: 16, width: 300),
