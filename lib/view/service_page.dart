@@ -184,7 +184,7 @@ class _ServicePageState extends State<ServicePage> {
               _homeText("On", 0.015, FontWeight.w900, Colors.grey.shade900),
               Margin(width: 10, height: 0),
               _homeText(
-                  "House Heaven", 0.015, FontWeight.w900, Colors.grey.shade900),
+                  "Home Haven", 0.015, FontWeight.w900, Colors.grey.shade900),
             ],
           ),
           Margin(width: 0, height: 70),
